@@ -11,6 +11,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.http import JsonResponse
 from django.db.models import Q, Count
+from django.db import connection, OperationalError
 from django.db.models.functions import TruncDate
 from django.views.decorators.csrf import csrf_exempt
 from datetime import timedelta
@@ -54,7 +55,7 @@ def forgot_password(request):
             otp_code = get_random_string(length=6, allowed_chars='0123456789')
             PasswordResetOTP.objects.filter(user=user).delete()
             PasswordResetOTP.objects.create(user=user, otp=otp_code)
-            send_password_reset_otp(email, otp_code, user.username)
+            send_password_reset_otp.delay(email, otp_code, user.username)
             request.session['reset_user'] = user.id
             request.session['otp_verified'] = False
             messages.success(request, f'OTP sent to {email}. Check your inbox.')
@@ -113,6 +114,16 @@ def reset_password(request):
 def protected_api(request):
     return Response({'message': 'Authenticated', 'role': request.user.role})
 
+def health_check(request):
+    status = "ok"
+    db_status = "ok"
+    try:
+        connection.ensure_connection()
+    except OperationalError:
+        status = "error"
+        db_status = "error"
+    return JsonResponse({"status": status, "db": db_status})
+
 
 def auth_status(request):
     if request.user.is_authenticated:
@@ -166,7 +177,7 @@ def register_view(request):
                 pending_password=hashed_password,
             )
             request.session['pending_email'] = email
-            send_email_verification_otp(email, otp_code, username)
+            send_email_verification_otp.delay(email, otp_code, username)
             messages.success(request, f'A 6-digit OTP has been sent to {email}.')
             return redirect('verify_email_otp')
     else:
@@ -204,8 +215,8 @@ def verify_email_otp(request):
         del request.session['pending_email']
 
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        send_welcome_email(email, user.username)
-        send_admin_new_signup_notification(user.username, email)
+        send_welcome_email.delay(email, user.username)
+        send_admin_new_signup_notification.delay(user.username, email)
         messages.success(request, f'Welcome, {user.username}! Your account is ready.')
         return redirect('home')
 
