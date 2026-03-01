@@ -1,0 +1,49 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}Verify Your Email{% endblock %}
+
+{% block content %}
+<div class="text-center" style="margin-bottom:1.5rem">
+    <div
+        style="width:56px;height:56px;background:linear-gradient(135deg,#7c3aed,#2563eb);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:24px">
+        📧
+    </div>
+    <h2 class="auth-title">Verify Your Email</h2>
+    <p style="color:rgba(255,255,255,.6);font-size:14px;margin-top:.5rem">
+        We sent a 6-digit OTP to<br>
+        <strong style="color:#a78bfa">{{ email }}</strong>
+    </p>
+</div>
+
+{% if messages %}
+<div style="margin-bottom:1rem">
+    {% for message in messages %}
+    <div style="padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:6px;
+        {% if message.tags == 'error' %}background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#fca5a5;
+        {% else %}background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#86efac;{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="text" name="otp" class="form-control" placeholder="Enter 6-digit OTP" maxlength="6"
+            pattern="[0-9]{6}" inputmode="numeric" autocomplete="one-time-code" required autofocus
+            style="text-align:center;font-size:22px;letter-spacing:8px;font-weight:700">
+    </div>
+    <button type="submit" class="btn-auth">Verify & Create Account</button>
+</form>
+
+<div class="auth-links" style="margin-top:1.25rem">
+    <p style="font-size:13px;color:rgba(255,255,255,.4)">
+        Didn't receive it? Check your spam folder or
+        <a href="{% url 'register' %}" style="color:#a78bfa">go back and try again</a>.
+    </p>
+    <p style="font-size:13px">
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+    </p>
+</div>
+{% endblock %}

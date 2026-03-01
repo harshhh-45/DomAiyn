@@ -1,0 +1,22 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h2 class="auth-title">Create Account</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mb-3">
+        {{ field.errors }}
+        <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" class="form-control"
+            placeholder="{{ field.label }}" required>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn-auth">Register</button>
+</form>
+
+<div class="auth-links">
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+{% endblock %}

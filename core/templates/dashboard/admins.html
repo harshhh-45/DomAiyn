@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Admins | DomAIyn Panel{% endblock %}
+{% block page_title %}Admin Details{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Admin Accounts</h2>
+    <a href="{% url 'admin_admin_create' %}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Admin</a>
+</div>
+<div class="panel-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in admins %}
+            <tr>
+                <td style="color:var(--muted)">{{ forloop.counter }}</td>
+                <td><strong>{{ a.username }}</strong></td>
+                <td style="color:var(--muted)">{{ a.email|default:"—" }}</td>
+                <td style="color:var(--muted)">{{ a.date_joined|date:"d M Y" }}</td>
+                <td>
+                    {% if a.is_superuser %}
+                    <span class="badge-pill badge-purple">Superuser</span>
+                    {% else %}
+                    <span class="badge-pill badge-blue">Staff</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if a != request.user %}
+                    <form method="post" action="{% url 'admin_admin_delete' a.id %}"
+                        onsubmit="return confirm('Remove admin {{ a.username }}?')">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i>
+                            Remove</button>
+                    </form>
+                    {% else %}
+                    <span style="color:var(--muted);font-size:0.8rem">You</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" style="text-align:center;color:var(--muted);padding:3rem">No admins found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

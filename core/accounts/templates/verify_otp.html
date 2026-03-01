@@ -1,0 +1,19 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}Verify OTP{% endblock %}
+
+{% block content %}
+<h2 class="auth-title">Verify OTP</h2>
+<p class="text-center mb-4" style="color: rgba(255,255,255,0.8);">Check your email for the 6-digit code.</p>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <input type="text" name="otp" class="form-control" placeholder="Enter OTP" maxlength="6" required>
+    </div>
+    <button type="submit" class="btn-auth">Verify</button>
+</form>
+
+<div class="auth-links">
+    <p><a href="{% url 'forgot_password' %}">Resend OTP</a></p>
+</div>
+{% endblock %}
