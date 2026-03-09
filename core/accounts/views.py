@@ -14,6 +14,7 @@ from django.db.models import Q, Count
 from django.db import connection, OperationalError
 from django.db.models.functions import TruncDate
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import never_cache
 from datetime import timedelta
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -56,6 +57,8 @@ def forgot_password(request):
             PasswordResetOTP.objects.filter(user=user).delete()
             PasswordResetOTP.objects.create(user=user, otp=otp_code)
             send_password_reset_otp.delay(email, otp_code, user.username)
+            if settings.DEBUG:
+                print(f"\n[DEBUG] PASSWORD RESET OTP FOR {email}: {otp_code}\n")
             request.session['reset_user'] = user.id
             request.session['otp_verified'] = False
             messages.success(request, f'OTP sent to {email}. Check your inbox.')
@@ -178,6 +181,8 @@ def register_view(request):
             )
             request.session['pending_email'] = email
             send_email_verification_otp.delay(email, otp_code, username)
+            if settings.DEBUG:
+                print(f"\n[DEBUG] REGISTRATION OTP FOR {email}: {otp_code}\n")
             messages.success(request, f'A 6-digit OTP has been sent to {email}.')
             return redirect('verify_email_otp')
     else:
@@ -272,13 +277,17 @@ def login_view(request):
     return render(request, 'login.html', {'next': next_url})
 
 
+@never_cache
 def home_view(request):
-    return render(request, 'home_v2.html', {'site_url': settings.SITE_URL})
+    return render(request, 'home_v2.html', {
+        'site_url': settings.SITE_URL,
+        'csp_nonce': getattr(request, 'csp_nonce', ''),
+    })
 
 
 def logout_view(request):
     logout(request)
-    return redirect(settings.SITE_URL)
+    return redirect('/')
 
 
 @role_required('admin', 'superadmin')

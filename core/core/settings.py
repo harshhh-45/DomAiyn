@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
+USE_LOCAL_DB = config('USE_LOCAL_DB', default=DEBUG, cast=bool)
 
 # Sentry Monitoring setup
 _sentry_dsn = config('SENTRY_DSN', default='https://52d303a15e40bad5b75fc5f4a00e325a@o4510968566906880.ingest.de.sentry.io/4510968569593936')
@@ -81,28 +82,38 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-# Supabase / PostgreSQL via individual params — no URL encoding issues
-_db_host = config('DB_HOST', default='')
-if _db_host:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME', default='postgres'),
-            'USER': config('DB_USER', default='postgres'),
-            'PASSWORD': config('DB_PASSWORD', default=''),
-            'HOST': _db_host,
-            'PORT': config('DB_PORT', default='5432'),
-            'CONN_MAX_AGE': 600,  # Keep DB connections alive for 10 minutes (Pooling)
-            'OPTIONS': {'sslmode': 'require'} if not DEBUG else {'sslmode': 'require'},
-        }
-    }
-else:
+# Database Configuration
+# Uses Local SQLite if USE_LOCAL_DB is True, otherwise uses PostgreSQL/Supabase
+if USE_LOCAL_DB:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+else:
+    _db_host = config('DB_HOST', default='')
+    if _db_host:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': config('DB_NAME', default='postgres'),
+                'USER': config('DB_USER', default='postgres'),
+                'PASSWORD': config('DB_PASSWORD', default=''),
+                'HOST': _db_host,
+                'PORT': config('DB_PORT', default='5432'),
+                'CONN_MAX_AGE': 600,
+                'OPTIONS': {'sslmode': 'require'},
+            }
+        }
+    else:
+        # Final fallback if no host is provided and USE_LOCAL_DB is False (unlikely)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -127,7 +138,6 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'static' / 'dist',
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
@@ -256,6 +266,10 @@ CELERY_BROKER_URL = config('CELERY_BROKER_URL', default=_redis_url) # uses redis
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=_redis_url)
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+if not CELERY_BROKER_URL:
+    CELERY_TASK_ALWAYS_EAGER = True
+    CELERY_TASK_STORE_EAGER_RESULT = True
 
 # AWS S3 Media Storage Configuration
 USE_S3 = config('USE_S3', default=False, cast=bool)

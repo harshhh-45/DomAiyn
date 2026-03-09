@@ -108,32 +108,6 @@ export default function HeroSection() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Side - Interactive Spherical Logo */}
-                    <motion.div
-                        className="relative h-[50vw] w-[50vw] sm:h-[40vw] sm:w-[40vw] lg:h-[35vw] lg:w-[35vw] flex items-center justify-center lg:justify-end order-1 lg:order-2 -mx-4 sm:mx-0 lg:mr-[-10%] pt-4 sm:pt-12 lg:pt-20"
-                        style={{
-                            overflow: 'visible',
-                            scale: logoScale,
-                            opacity: logoOpacity,
-                            y: logoY
-                        }}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                    >
-                        {/* Main Logo - Responsive sizing */}
-                        <motion.img
-                            src="/static/sphere_logo.png"
-                            alt="DomAIyn Sphere Logo"
-                            className="cursor-pointer w-full h-full object-contain"
-                            style={{
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                                mixBlendMode: 'lighten',
-                                filter: 'brightness(1.0) contrast(1.1) saturate(1.0)',
-                            }}
-                        />
-                    </motion.div>
                 </div>
             </div>
         </section>

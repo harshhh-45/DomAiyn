@@ -14,3 +14,5 @@ def check_sql_injection(value, field_name='Field'):
     """
     if SQL_PATTERNS.search(value):
         raise ValidationError(f"{field_name} contains invalid characters.")
+
+# Trigger reload

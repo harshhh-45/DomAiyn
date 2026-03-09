@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: domayn-django
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn core.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: USE_LOCAL_DB
+        value: "False"
+      - key: ALLOWED_HOSTS
+        sync: false   # Set this to your Render domain, e.g.: domayn.onrender.com
+      - key: SITE_URL
+        sync: false   # https://domayn.onrender.com
+      - key: BACKEND_URL
+        sync: false   # https://domayn.onrender.com
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_PORT
+        value: "5432"
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: ADMIN_NOTIFICATION_EMAIL
+        sync: false
