@@ -61,7 +61,7 @@ export default function RocketNav({ activeSection, onSectionChange }) {
                                         Login
                                     </a>
                                     <a href="/register/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white px-2 py-0.5 rounded border border-white/30 hover:bg-white/10 transition-all duration-300 font-space">
-                                        Join
+                                        Sign Up
                                     </a>
                                 </>
                             )}

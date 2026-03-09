@@ -205,12 +205,19 @@ def verify_email_otp(request):
             messages.error(request, 'Incorrect OTP. Please try again.')
             return render(request, 'verify_email_otp.html', {'email': email})
 
+        # Check if user already exists (just in case)
+        if User.objects.filter(username=otp_obj.pending_username).exists():
+            messages.error(request, 'A user with this username already exists. Please register with a different one.')
+            return redirect('register')
+
         user = User(
             username=otp_obj.pending_username,
             email=email,
-            password=otp_obj.pending_password,
         )
+        # Use the already hashed password from the OTP object
+        user.password = otp_obj.pending_password
         user.save()
+        
         otp_obj.delete()
         del request.session['pending_email']
 
@@ -246,19 +253,21 @@ def login_view(request):
                 return render(request, 'login.html', {'next': next_url})
 
             user_to_auth = User.objects.filter(Q(username=login_input) | Q(email=login_input)).first()
-            user = authenticate(request, username=user_to_auth.username, password=password) if user_to_auth else None
-
-            if user is not None:
-                if not user.is_active:
-                    messages.error(request, 'Your account has been disabled. Contact support.')
-                else:
-                    login(request, user)
-                    # Respect ?next= param — only allow internal URLs for safety
-                    if next_url and next_url.startswith('/'):
-                        return redirect(next_url)
-                    return redirect('home')
+            
+            if not user_to_auth:
+                messages.error(request, f"No account found with username or email '{login_input}'.")
             else:
-                messages.error(request, 'Invalid username/email or password.')
+                user = authenticate(request, username=user_to_auth.username, password=password)
+                if user is not None:
+                    if not user.is_active:
+                        messages.error(request, 'Your account has been disabled. Contact support.')
+                    else:
+                        login(request, user)
+                        if next_url and next_url.startswith('/'):
+                            return redirect(next_url)
+                        return redirect('home')
+                else:
+                    messages.error(request, 'Incorrect password. Please try again.')
     next_url = request.GET.get('next', '')
     return render(request, 'login.html', {'next': next_url})
 

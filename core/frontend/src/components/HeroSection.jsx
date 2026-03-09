@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function HeroSection() {
     const sectionRef = useRef(null);
-    
+
     // Track scroll progress relative to this section
     // "start start": when top of section meets top of viewport (0 progress)
     // "end start": when bottom of section meets top of viewport (1 progress)
@@ -19,9 +19,9 @@ export default function HeroSection() {
     const logoY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]); // Subtle parallax movement
 
     return (
-        <section 
-            id="Home" 
-            ref={sectionRef} 
+        <section
+            id="Home"
+            ref={sectionRef}
             className="relative min-h-screen z-20" /* Increased z-index to prevent clipping by subsequent sections */
         >
             <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10 pt-2">
@@ -108,27 +108,8 @@ export default function HeroSection() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Side - Interactive Spherical Logo */}
-                    <motion.div
-                        className="relative h-[50vh] sm:h-[70vh] lg:h-[90vh] flex items-center justify-center lg:justify-end order-1 lg:order-2 -mx-4 sm:mx-0 lg:mr-[-15%] pt-4 sm:pt-12 lg:pt-20"
-                        style={{ overflow: 'visible', scale: logoScale, opacity: logoOpacity, y: logoY }}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                    >
-                        {/* Main Logo - Responsive sizing */}
-                        <motion.img
-                            src="/sphere_logo.png"
-                            alt="DomAIyn Labs Logo"
-                            className="cursor-pointer w-full h-full object-contain"
-                            style={{
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                                mixBlendMode: 'lighten',
-                                filter: 'brightness(1.0) contrast(1.1) saturate(1.0)',
-                            }}
-                        />
-                    </motion.div>
+                    {/* Right Side - Removed Logo */}
+                    <div className="hidden lg:block"></div>
                 </div>
             </div>
         </section>

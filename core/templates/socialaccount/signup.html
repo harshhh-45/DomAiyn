@@ -1,0 +1,73 @@
+{% extends "base_auth.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <div class="text-center">
+        <h2
+            class="text-3xl font-space font-bold bg-gradient-to-r from-nebula-purple via-nebula-blue to-nebula-pink bg-clip-text text-transparent">
+            {% trans "Complete Sign Up" %}
+        </h2>
+        <p class="text-white/60 font-inter mt-2">
+            {% blocktrans with provider_name=account.get_provider.name %}You are about to use your {{provider_name}}
+            account to login to {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}
+        </p>
+    </div>
+
+    <form class="signup space-y-4" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="space-y-1">
+            <label class="block text-xs uppercase tracking-widest text-white/40 font-space ml-1">
+                {{ field.label }}
+            </label>
+            <div class="relative group">
+                {{ field }}
+            </div>
+            {% if field.errors %}
+            {% for error in field.errors %}
+            <p class="text-nebula-pink text-xs mt-1 ml-1">{{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+
+        <button type="submit"
+            class="w-full py-3 bg-gradient-to-r from-nebula-purple via-nebula-blue to-nebula-pink rounded-lg font-space font-semibold text-white hover:shadow-lg hover:shadow-nebula-purple/30 transition-all duration-300 mt-4">
+            {% trans "Sign Up" %} &raquo;
+        </button>
+    </form>
+</div>
+
+<style>
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    input[type="number"] {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        color: white;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #3AAFFF;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 0 2px rgba(58, 175, 255, 0.2);
+    }
+</style>
+{% endblock %}
