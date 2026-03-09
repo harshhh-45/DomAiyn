@@ -263,7 +263,6 @@ def login_view(request):
     return render(request, 'login.html', {'next': next_url})
 
 
-@login_required
 def home_view(request):
     return render(request, 'home.html', {'site_url': settings.SITE_URL})
 

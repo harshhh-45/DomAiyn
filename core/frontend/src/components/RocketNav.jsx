@@ -42,12 +42,29 @@ export default function RocketNav({ activeSection, onSectionChange }) {
 
                         {/* Auth Links */}
                         <div className="flex gap-2 sm:gap-4 ml-2 sm:ml-4 border-l border-white/20 pl-2 sm:pl-4">
-                            <a href="/login/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors duration-300 font-space">
-                                Login
-                            </a>
-                            <a href="/register/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white px-2 py-0.5 rounded border border-white/30 hover:bg-white/10 transition-all duration-300 font-space">
-                                Join
-                            </a>
+                            {window.user?.isAuthenticated ? (
+                                <>
+                                    {window.user.isStaff && (
+                                        <a href="/panel/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-nebula-blue hover:text-white transition-colors duration-300 font-space">
+                                            Admin
+                                        </a>
+                                    )}
+                                    <form action="/logout/" method="post" className="inline">
+                                        <button type="submit" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors duration-300 font-space">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </>
+                            ) : (
+                                <>
+                                    <a href="/login/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors duration-300 font-space">
+                                        Login
+                                    </a>
+                                    <a href="/register/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white px-2 py-0.5 rounded border border-white/30 hover:bg-white/10 transition-all duration-300 font-space">
+                                        Join
+                                    </a>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
