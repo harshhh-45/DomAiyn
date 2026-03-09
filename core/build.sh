@@ -3,13 +3,19 @@
 
 set -o errexit  # exit on error
 
-# Install Python dependencies
+# ── 1. Build React/Vite frontend ──────────────────────────────────────────────
+cd frontend
+npm ci                  # clean, reproducible install
+npm run build           # outputs fresh assets → ../static/dist/
+cd ..
+
+# ── 2. Install Python dependencies ───────────────────────────────────────────
 pip install -r requirements.txt
 
-# Run Django database migrations
+# ── 3. Run Django database migrations ────────────────────────────────────────
 python manage.py migrate --noinput
 
-# Collect static files
+# ── 4. Collect static files (WhiteNoise will serve them) ─────────────────────
 python manage.py collectstatic --noinput
 
 # Create superuser if needed (set env vars DJANGO_SUPERUSER_* on Render)
