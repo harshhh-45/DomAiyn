@@ -41,28 +41,57 @@ export default function RocketNav({ activeSection, onSectionChange }) {
                         ))}
 
                         {/* Auth Links */}
-                        <div className="flex gap-2 sm:gap-4 ml-2 sm:ml-4 border-l border-white/20 pl-2 sm:pl-4">
+                        <div className="flex items-center gap-3 sm:gap-4 ml-2 sm:ml-4 border-l border-white/20 pl-2 sm:pl-4">
                             {window.user?.isAuthenticated ? (
-                                <>
-                                    {window.user.isStaff && (
-                                        <a href="/panel/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-nebula-blue hover:text-white transition-colors duration-300 font-space">
-                                            Admin
-                                        </a>
-                                    )}
-                                    <form action="/logout/" method="post" className="inline">
-                                        <button type="submit" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors duration-300 font-space">
-                                            Logout
-                                        </button>
-                                    </form>
-                                </>
+                                <div className="relative group flex flex-col items-center">
+                                    {/* Initials Circle */}
+                                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-nebula-purple to-nebula-blue flex items-center justify-center shadow-lg shadow-purple-500/20 border border-white/20 cursor-pointer">
+                                        <span className="text-white text-xs sm:text-sm font-space font-bold uppercase">
+                                            {window.user.username.substring(0, 2)}
+                                        </span>
+                                    </div>
+
+                                    {/* Username Label */}
+                                    <span className="text-[8px] sm:text-[10px] uppercase font-space font-bold tracking-tighter mt-1 text-white/80">
+                                        {window.user.username}
+                                    </span>
+
+                                    {/* Dropdown Menu */}
+                                    <div className="absolute top-[120%] right-0 w-36 sm:w-44 bg-black/90 backdrop-blur-md border border-white/10 rounded-xl p-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto shadow-2xl z-50">
+                                        <div className="px-3 py-2 border-b border-white/5 mb-1">
+                                            <p className="text-[10px] sm:text-xs text-white font-space font-bold truncate">{window.user.username}</p>
+                                            <p className="text-[8px] sm:text-[10px] text-white/40 font-inter">{window.user.isStaff ? 'Admin' : 'User'}</p>
+                                        </div>
+
+                                        {window.user.isStaff && (
+                                            <a href="/panel/" className="block w-full px-3 py-2 text-[10px] sm:text-xs text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors duration-200 font-space flex items-center gap-2">
+                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14" /></svg>
+                                                Admin Panel
+                                            </a>
+                                        )}
+
+                                        <form action="/logout/" method="post" className="m-0">
+                                            <button type="submit" className="w-full text-left px-3 py-2 text-[10px] sm:text-xs text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded-lg transition-colors duration-200 font-space flex items-center gap-2">
+                                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                                                Logout
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             ) : (
                                 <>
-                                    <a href="/login/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors duration-300 font-space">
-                                        Login
-                                    </a>
-                                    <a href="/register/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white px-2 py-0.5 rounded border border-white/30 hover:bg-white/10 transition-all duration-300 font-space">
-                                        Sign Up
-                                    </a>
+                                    <div className="relative group flex flex-col items-center">
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full bg-white/50 group-hover:bg-white/80 transition-all duration-300" />
+                                        <a href="/login/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/40 group-hover:text-white/60 transition-colors duration-300 font-space mt-1">
+                                            Login
+                                        </a>
+                                    </div>
+                                    <div className="relative group flex flex-col items-center">
+                                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-2.5 md:h-2.5 rounded-full bg-nebula-pink/50 group-hover:bg-nebula-pink transition-all duration-300" />
+                                        <a href="/register/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-nebula-pink group-hover:text-nebula-pink transition-colors duration-300 font-space mt-1">
+                                            Sign Up
+                                        </a>
+                                    </div>
                                 </>
                             )}
                         </div>
