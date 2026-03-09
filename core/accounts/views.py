@@ -264,7 +264,7 @@ def login_view(request):
 
 
 def home_view(request):
-    return render(request, 'home.html', {'site_url': settings.SITE_URL})
+    return render(request, 'home_v2.html', {'site_url': settings.SITE_URL})
 
 
 def logout_view(request):
