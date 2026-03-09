@@ -12,6 +12,7 @@ django-allauth==65.14.3
 django-cors-headers==4.9.0
 bcrypt==5.0.0
 requests
+cryptography
 
 # REST API
 djangorestframework==3.16.1
