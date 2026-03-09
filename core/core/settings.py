@@ -125,10 +125,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    BASE_DIR / 'static' / 'dist',
+]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-SITE_URL = config('SITE_URL', default='http://localhost:5173')
+SITE_URL = config('SITE_URL', default='http://localhost:8000')
 BACKEND_URL = config('BACKEND_URL', default='http://localhost:8000')
 
 LOGIN_URL = '/login/'
@@ -136,6 +139,7 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_LOGIN_URL = '/login/'
 
+# Session/CSRF same-domain setup
 SESSION_COOKIE_AGE = 900
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_SAVE_EVERY_REQUEST = True
@@ -154,7 +158,6 @@ SECURE_HSTS_SECONDS = 0 if DEBUG else 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
 SECURE_HSTS_PRELOAD = not DEBUG
 
-CORS_ALLOWED_ORIGINS = [o.strip() for o in config('CORS_ALLOWED_ORIGINS', default='http://localhost:5173,http://127.0.0.1:5173').split(',') if o.strip()]
 CORS_ALLOW_CREDENTIALS = True
 
 SOCIALACCOUNT_PROVIDERS = {

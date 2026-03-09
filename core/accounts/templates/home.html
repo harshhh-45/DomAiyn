@@ -1,63 +1,23 @@
-{% extends 'base_auth.html' %}
-
-{% block title %}Welcome{% endblock %}
-
-{% block content %}
-<div class="text-center">
-    <h2 class="auth-title">Welcome, {{ request.user.username }}! 🎉</h2>
-    <p class="mb-4" style="color: rgba(255,255,255,0.8);">You are successfully logged in. Redirecting you home...</p>
-
-    <div style="margin: 1.5rem auto; width: 48px; height: 48px;">
-        <svg style="animation: spin 1s linear infinite; color: #a855f7;" viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-opacity="0.25" />
-            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-        </svg>
-    </div>
-
-    <style nonce="{{ request.csp_nonce }}">
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
-    <div style="display:flex;flex-direction:column;gap:0.75rem">
-        {% if request.user.is_staff %}
-        <a href="{% url 'admin_dashboard' %}" class="btn-auth" style="text-decoration:none;display:block">
-            ⚡ Admin Panel
-        </a>
-        {% endif %}
-        <a id="homeLink" class="btn-auth" style="text-decoration:none;display:block;cursor:pointer" onclick="goHome()">
-            Go to Home Now →
-        </a>
-        <form method="post" action="{% url 'logout' %}" style="margin:0">
-            {% csrf_token %}
-            <button type="submit" class="btn-auth"
-                style="width:100%;background:rgba(255,255,255,0.15);color:#fff;border:none;cursor:pointer">
-                Logout
-            </button>
-        </form>
-    </div>
-</div>
-
-<script nonce="{{ request.csp_nonce }}">
-    // Build redirect URL in JS to avoid Django HTML-encoding the & as &amp;
-    var username = "{{ request.user.username }}";
-    var isStaff = "{% if request.user.is_staff %}1{% else %}0{% endif %}";
-    var siteUrl = "{{ site_url|default:'http://localhost:5173' }}";
-    var homeUrl = siteUrl + "/?user=" + encodeURIComponent(username) + "&staff=" + isStaff;
-
-    function goHome() {
-        window.location.href = homeUrl;
-    }
-
-    // Auto-redirect after 2 seconds
-    setTimeout(goHome, 2000);
-</script>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DomAIyn Labs</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- React CSS -->
+    <link rel="stylesheet" href="{% static 'assets/main.css' %}">
+</head>
+<body class="bg-[#271E37]">
+    <div id="root"></div>
+    
+    <!-- React JS -->
+    <script type="module" src="{% static 'assets/main.js' %}"></script>
+</body>
+</html>

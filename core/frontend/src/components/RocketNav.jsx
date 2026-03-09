@@ -39,6 +39,16 @@ export default function RocketNav({ activeSection, onSectionChange }) {
                                 </span>
                             </button>
                         ))}
+
+                        {/* Auth Links */}
+                        <div className="flex gap-2 sm:gap-4 ml-2 sm:ml-4 border-l border-white/20 pl-2 sm:pl-4">
+                            <a href="/login/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white/60 hover:text-white transition-colors duration-300 font-space">
+                                Login
+                            </a>
+                            <a href="/register/" className="text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wider text-white px-2 py-0.5 rounded border border-white/30 hover:bg-white/10 transition-all duration-300 font-space">
+                                Join
+                            </a>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -56,8 +66,8 @@ export default function RocketNav({ activeSection, onSectionChange }) {
                         className="relative group flex items-center justify-end gap-4"
                     >
                         <span className={`text-xs uppercase tracking-widest font-space whitespace-nowrap transition-all duration-300 ${activeSection === section
-                                ? (section === 'Bayora' ? 'text-white/80 font-semibold opacity-0 group-hover:opacity-100' : 'text-white/80 font-semibold opacity-100')
-                                : 'text-white/20 group-hover:text-white/40 opacity-0 group-hover:opacity-100'
+                            ? (section === 'Bayora' ? 'text-white/80 font-semibold opacity-0 group-hover:opacity-100' : 'text-white/80 font-semibold opacity-100')
+                            : 'text-white/20 group-hover:text-white/40 opacity-0 group-hover:opacity-100'
                             }`}>
                             {section}
                         </span>
