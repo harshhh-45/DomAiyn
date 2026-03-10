@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Canvas } from '@react-three/fiber';
+import ParticleMolecule from './ParticleMolecule';
 
 export default function HeroSection() {
     const sectionRef = useRef(null);
@@ -108,6 +110,18 @@ export default function HeroSection() {
                         </motion.div>
                     </motion.div>
 
+                    {/* Right Side - 3D Globe */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2, delay: 0.4 }}
+                        className="order-1 lg:order-2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full relative"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-tr from-nebula-purple/20 via-nebula-blue/10 to-transparent blur-3xl rounded-full"></div>
+                        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+                            <ParticleMolecule />
+                        </Canvas>
+                    </motion.div>
                 </div>
             </div>
         </section>

@@ -16,12 +16,6 @@ export default function RocketNav({ activeSection, onSectionChange }) {
             <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
                 <div className="relative w-[450px] h-20 flex items-center px-6 py-3 bg-black/40 backdrop-blur-md rounded-full border border-white/10 shadow-2xl">
                     <div className="flex justify-between items-center w-full">
-                        {/* Logo added here */}
-                        <div className="flex items-center gap-1 mr-4 hidden sm:flex">
-                            <span className="text-[12px] font-bold text-white tracking-widest font-space">
-                                Dom<span className="bg-gradient-to-r from-[#3AAFFF] to-[#A22DFF] bg-clip-text text-transparent">A</span><span className="bg-gradient-to-r from-[#FF4DB6] to-[#A22DFF] bg-clip-text text-transparent">I</span>yn
-                            </span>
-                        </div>
                         {sections.map((section) => (
                             <button
                                 key={section}
