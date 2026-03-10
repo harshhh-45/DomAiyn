@@ -193,7 +193,7 @@ export default function ContactSection() {
                         className="flex flex-col space-y-6 lg:col-span-2"
                     >
                         {/* Office Locations */}
-                        <div>
+                        <address className="not-italic">
                             <h3 className="text-xl sm:text-2xl font-space font-semibold text-white mb-4 sm:mb-6">Our Offices</h3>
                             <div className="space-y-4 sm:space-y-5">
                                 {offices.map((office, index) => (
@@ -260,7 +260,7 @@ export default function ContactSection() {
                                         </div>
                                     </motion.div>
                                 ))}</div>
-                        </div>
+                        </address>
 
                         {/* Social Media Links */}
                         <div>

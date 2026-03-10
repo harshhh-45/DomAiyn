@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic.base import TemplateView
 from .views import (
     register_view, login_view, logout_view, home_view, protected_api,
     forgot_password, verify_otp, reset_password,
@@ -6,10 +7,18 @@ from .views import (
     admin_contacts, admin_contact_view, admin_contact_delete,
     admin_admins, admin_admin_create, admin_admin_delete,
     admin_reports, contact_submit, auth_status, verify_email_otp,
+    health_check, # Assuming health_check is a new view that needs to be imported
 )
 
 urlpatterns = [
     path('', home_view, name='home'),
+    path('health/', health_check, name='health_check'),
+    
+    # SEO directives
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path('sitemap.xml', TemplateView.as_view(template_name="sitemap.xml", content_type="text/xml")),
+    
+    # Auth Status API
     path('register/', register_view, name='register'),
     path('verify-email-otp/', verify_email_otp, name='verify_email_otp'),
     path('login/', login_view, name='login'),
