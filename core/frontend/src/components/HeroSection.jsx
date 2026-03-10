@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import ParticleMolecule from './ParticleMolecule';
+import DottedGlobe from './DottedGlobe';
 
 export default function HeroSection() {
     const sectionRef = useRef(null);
@@ -119,7 +119,7 @@ export default function HeroSection() {
                     >
                         <div className="absolute inset-0 bg-gradient-to-tr from-nebula-purple/20 via-nebula-blue/10 to-transparent blur-3xl rounded-full"></div>
                         <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-                            <ParticleMolecule />
+                            <DottedGlobe />
                         </Canvas>
                     </motion.div>
                 </div>
