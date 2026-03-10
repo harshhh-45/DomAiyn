@@ -247,29 +247,7 @@ LOGGING = {
     },
 }
 
-# Redis Cache setup
-# Assuming Railway/Render provide REDIS_URL environment variable
-_redis_url = config('REDIS_URL', default='')
-if _redis_url:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': _redis_url,
-            'OPTIONS': {
-                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            }
-        }
-    }
 
-# Celery Configuration for Background Tasks
-CELERY_BROKER_URL = config('CELERY_BROKER_URL', default=_redis_url) # uses redis as broker
-CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=_redis_url)
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-
-if not CELERY_BROKER_URL:
-    CELERY_TASK_ALWAYS_EAGER = True
-    CELERY_TASK_STORE_EAGER_RESULT = True
 
 # AWS S3 Media Storage Configuration
 USE_S3 = config('USE_S3', default=False, cast=bool)

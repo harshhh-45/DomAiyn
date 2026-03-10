@@ -20,6 +20,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 import json
+import threading
 
 from .forms import RegisterForm
 from .models import PasswordResetOTP, ContactMessage, EmailVerificationOTP
@@ -56,7 +57,7 @@ def forgot_password(request):
             otp_code = get_random_string(length=6, allowed_chars='0123456789')
             PasswordResetOTP.objects.filter(user=user).delete()
             PasswordResetOTP.objects.create(user=user, otp=otp_code)
-            send_password_reset_otp.delay(email, otp_code, user.username)
+            threading.Thread(target=send_password_reset_otp, args=(email, otp_code, user.username)).start()
             if settings.DEBUG:
                 print(f"\n[DEBUG] PASSWORD RESET OTP FOR {email}: {otp_code}\n")
             request.session['reset_user'] = user.id
@@ -180,7 +181,7 @@ def register_view(request):
                 pending_password=hashed_password,
             )
             request.session['pending_email'] = email
-            send_email_verification_otp.delay(email, otp_code, username)
+            threading.Thread(target=send_email_verification_otp, args=(email, otp_code, username)).start()
             if settings.DEBUG:
                 print(f"\n[DEBUG] REGISTRATION OTP FOR {email}: {otp_code}\n")
             messages.success(request, f'A 6-digit OTP has been sent to {email}.')
@@ -227,8 +228,8 @@ def verify_email_otp(request):
         del request.session['pending_email']
 
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        send_welcome_email.delay(email, user.username)
-        send_admin_new_signup_notification.delay(user.username, email)
+        threading.Thread(target=send_welcome_email, args=(email, user.username)).start()
+        threading.Thread(target=send_admin_new_signup_notification, args=(user.username, email)).start()
         messages.success(request, f'Welcome, {user.username}! Your account is ready.')
         return redirect('home')
 

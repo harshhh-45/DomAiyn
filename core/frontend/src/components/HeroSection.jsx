@@ -1,7 +1,5 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Canvas } from '@react-three/fiber';
-import DottedGlobe from './DottedGlobe';
 
 export default function HeroSection() {
     const sectionRef = useRef(null);
@@ -52,7 +50,7 @@ export default function HeroSection() {
                                     <span
                                         className="bg-gradient-to-b from-[#FF4DB6] to-[#A22DFF] bg-clip-text text-transparent"
                                     >
-                                        I
+                                        l
                                     </span>
                                     <span className="text-white">yn Labs</span>
                                 </h1>
@@ -110,17 +108,31 @@ export default function HeroSection() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Right Side - 3D Globe */}
+                    {/* Right Side - Interactive Spherical Logo */}
                     <motion.div
+                        className="relative h-[50vw] w-[50vw] sm:h-[40vw] sm:w-[40vw] lg:h-[35vw] lg:w-[35vw] flex items-center justify-center lg:justify-end order-1 lg:order-2 -mx-4 sm:mx-0 lg:mr-[-10%] pt-4 sm:pt-12 lg:pt-20"
+                        style={{
+                            overflow: 'visible',
+                            scale: logoScale,
+                            opacity: logoOpacity,
+                            y: logoY
+                        }}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1.2, delay: 0.4 }}
-                        className="order-1 lg:order-2 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full relative"
+                        transition={{ duration: 1, delay: 0.5 }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-nebula-purple/20 via-nebula-blue/10 to-transparent blur-3xl rounded-full"></div>
-                        <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
-                            <DottedGlobe />
-                        </Canvas>
+                        {/* Main Logo - Responsive sizing */}
+                        <motion.img
+                            src="/static/dist/sphere_logo.png"
+                            alt="DomAIyn Sphere Logo"
+                            className="cursor-pointer w-full h-full object-contain"
+                            style={{
+                                maxWidth: '100%',
+                                maxHeight: '100%',
+                                mixBlendMode: 'lighten',
+                                filter: 'brightness(1.0) contrast(1.1) saturate(1.0)',
+                            }}
+                        />
                     </motion.div>
                 </div>
             </div>

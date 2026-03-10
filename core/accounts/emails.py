@@ -1,7 +1,6 @@
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.utils.html import strip_tags
-from celery import shared_task
 
 ADMIN_EMAIL = getattr(settings, 'ADMIN_NOTIFICATION_EMAIL', settings.EMAIL_HOST_USER)
 SITE_URL = getattr(settings, 'SITE_URL', 'http://localhost:5173')
@@ -24,8 +23,6 @@ def _send(subject, html_body, to_email):
         print(f'[EMAIL ERROR] Failed to send to {to_email}: {e}')
         return False
 
-
-@shared_task
 def send_email_verification_otp(email, otp, username):
     subject = 'Verify your DomAIyn email address'
     html = f"""
@@ -50,8 +47,6 @@ def send_email_verification_otp(email, otp, username):
     """
     return _send(subject, html, email)
 
-
-@shared_task
 def send_password_reset_otp(email, otp, username):
     subject = 'DomAIyn — Password Reset OTP'
     html = f"""
@@ -76,8 +71,6 @@ def send_password_reset_otp(email, otp, username):
     """
     return _send(subject, html, email)
 
-
-@shared_task
 def send_welcome_email(email, username):
     subject = 'Welcome to DomAIyn! 🚀'
     html = f"""
@@ -109,8 +102,6 @@ def send_welcome_email(email, username):
     """
     return _send(subject, html, email)
 
-
-@shared_task
 def send_admin_new_signup_notification(username, email):
     subject = f'[DomAIyn Admin] New signup: {username}'
     html = f"""
