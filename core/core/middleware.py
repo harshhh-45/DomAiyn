@@ -18,7 +18,7 @@ class AdminAccessMiddleware:
         if path.startswith('/admin/') or path.startswith('/panel/'):
             if not request.user.is_authenticated:
                 return redirect(f'/login/?next={path}')
-            if not request.user.is_admin:
+            if not (request.user.is_admin or request.user.is_superuser or request.user.is_staff):
                 messages.error(request, 'Access denied. Admin accounts only.')
                 return redirect('home')
         return self.get_response(request)

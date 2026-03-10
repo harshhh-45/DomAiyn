@@ -39,7 +39,7 @@ def role_required(*roles):
         def wrapper(request, *args, **kwargs):
             if not request.user.is_authenticated:
                 return redirect('login')
-            if request.user.role not in roles:
+            if not request.user.is_superuser and request.user.role not in roles:
                 messages.error(request, 'Access denied. Insufficient permissions.')
                 return redirect('home')
             return view_func(request, *args, **kwargs)
