@@ -1,6 +1,9 @@
+import logging
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.utils.html import strip_tags
+
+logger = logging.getLogger(__name__)
 
 ADMIN_EMAIL = getattr(settings, 'ADMIN_NOTIFICATION_EMAIL', settings.EMAIL_HOST_USER)
 SITE_URL = getattr(settings, 'SITE_URL', 'http://localhost:5173')
@@ -9,18 +12,23 @@ BACKEND_URL = getattr(settings, 'BACKEND_URL', 'http://localhost:8000')
 
 def _send(subject, html_body, to_email):
     plain = strip_tags(html_body)
+    from_email = f'DomAIyn <{settings.EMAIL_HOST_USER}>'
     msg = EmailMultiAlternatives(
         subject=subject,
         body=plain,
-        from_email=f'DomAIyn <{settings.EMAIL_HOST_USER}>',
+        from_email=from_email,
         to=[to_email],
     )
     msg.attach_alternative(html_body, 'text/html')
     try:
+        logger.info(f"[EMAIL INFO] Attempting to send '{subject}' to {to_email} using {settings.EMAIL_HOST_USER}")
         msg.send(fail_silently=False)
+        logger.info(f"[EMAIL SUCCESS] Sent to {to_email}")
         return True
     except Exception as e:
-        print(f'[EMAIL ERROR] Failed to send to {to_email}: {e}')
+        logger.error(f'[EMAIL ERROR] Failed to send to {to_email}. Error: {e}')
+        # Log settings for debugging (mask password)
+        logger.debug(f"Email Config: HOST={settings.EMAIL_HOST}, PORT={settings.EMAIL_PORT}, USER={settings.EMAIL_HOST_USER}")
         return False
 
 def send_email_verification_otp(email, otp, username):

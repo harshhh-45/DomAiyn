@@ -212,6 +212,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default=EMAIL_HOST_USER)
+SEND_EMAIL_SYNCHRONOUSLY = config('SEND_EMAIL_SYNCHRONOUSLY', default=False, cast=bool)
 
 # Structured Logging Configuration
 LOGGING = {

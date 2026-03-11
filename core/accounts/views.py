@@ -8,7 +8,10 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.utils.crypto import get_random_string
 from django.utils import timezone
+import logging
 from django.conf import settings
+
+logger = logging.getLogger(__name__)
 from django.http import JsonResponse
 from django.db.models import Q, Count
 from django.db import connection, OperationalError
@@ -57,7 +60,13 @@ def forgot_password(request):
             otp_code = get_random_string(length=6, allowed_chars='0123456789')
             PasswordResetOTP.objects.filter(user=user).delete()
             PasswordResetOTP.objects.create(user=user, otp=otp_code)
-            threading.Thread(target=send_password_reset_otp, args=(email, otp_code, user.username)).start()
+            
+            logger.info(f"[EMAIL INFO] Starting password reset OTP email for {email}")
+            if getattr(settings, 'SEND_EMAIL_SYNCHRONOUSLY', False):
+                send_password_reset_otp(email, otp_code, user.username)
+            else:
+                threading.Thread(target=send_password_reset_otp, args=(email, otp_code, user.username)).start()
+
             if settings.DEBUG:
                 print(f"\n[DEBUG] PASSWORD RESET OTP FOR {email}: {otp_code}\n")
             request.session['reset_user'] = user.id
@@ -181,7 +190,13 @@ def register_view(request):
                 pending_password=hashed_password,
             )
             request.session['pending_email'] = email
-            threading.Thread(target=send_email_verification_otp, args=(email, otp_code, username)).start()
+            
+            logger.info(f"[EMAIL INFO] Starting registration OTP email for {email}")
+            if getattr(settings, 'SEND_EMAIL_SYNCHRONOUSLY', False):
+                send_email_verification_otp(email, otp_code, username)
+            else:
+                threading.Thread(target=send_email_verification_otp, args=(email, otp_code, username)).start()
+
             if settings.DEBUG:
                 print(f"\n[DEBUG] REGISTRATION OTP FOR {email}: {otp_code}\n")
             messages.success(request, f'A 6-digit OTP has been sent to {email}.')
@@ -228,8 +243,15 @@ def verify_email_otp(request):
         del request.session['pending_email']
 
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        threading.Thread(target=send_welcome_email, args=(email, user.username)).start()
-        threading.Thread(target=send_admin_new_signup_notification, args=(user.username, email)).start()
+        
+        logger.info(f"[EMAIL INFO] Starting welcome and admin notification emails for {email}")
+        if getattr(settings, 'SEND_EMAIL_SYNCHRONOUSLY', False):
+            send_welcome_email(email, user.username)
+            send_admin_new_signup_notification(user.username, email)
+        else:
+            threading.Thread(target=send_welcome_email, args=(email, user.username)).start()
+            threading.Thread(target=send_admin_new_signup_notification, args=(user.username, email)).start()
+
         messages.success(request, f'Welcome, {user.username}! Your account is ready.')
         return redirect('home')
 
