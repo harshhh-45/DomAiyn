@@ -1,4 +1,4 @@
-﻿{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,9 +41,9 @@
     <div id="root"></div>
     <script nonce="{{ csp_nonce }}">
         window.djangoAuth = {
-            isAuthenticated: {{ user.is_authenticated | yesno: "true,false" }},
+            isAuthenticated: {{ user.is_authenticated|yesno:"true,false" }},
         username: "{{ user.username|default:'' }}",
-            isStaff: { { user.is_staff | yesno: "true,false" } }
+            isStaff: {{ user.is_staff|yesno:"true,false" }}
         };
     </script>
     <script type="module" src="{% static 'dist/assets/main.js' %}?v={% now 'U' %}"></script>
