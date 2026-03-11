@@ -47,17 +47,25 @@ body {
 .form-control {
     background: #1A1A1A;
     border: 1px solid #2A2A2A;
-    color: #fff;
+    color: #ffffff !important;
     padding: 0.8rem 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
     transition: all 0.2s ease;
     width: 100%;
     font-family: 'Inter', sans-serif;
+    /* Explicitly disable any potential masking for standard fields */
+    -webkit-text-security: none !important;
+    text-security: none !important;
+}
+
+/* Ensure password fields remain masked */
+input[type="password"].form-control {
+    -webkit-text-security: disc !important;
 }
 
 .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .form-control:focus {

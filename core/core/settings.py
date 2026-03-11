@@ -170,6 +170,15 @@ SECURE_HSTS_PRELOAD = not DEBUG
 
 CORS_ALLOW_CREDENTIALS = True
 
+# Parse allowed origins from env var — defaults to SITE_URL so the frontend can always POST
+_cors_origins = config('CORS_ALLOWED_ORIGINS', default=SITE_URL)
+CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_origins.split(',') if o.strip()]
+
+# Also allow any Render preview URLs automatically
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r'^https://.*\.onrender\.com$',
+]
+
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
