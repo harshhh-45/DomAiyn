@@ -61,7 +61,7 @@ class SecurityHeadersMiddleware:
         response['Content-Security-Policy'] = (
             f"default-src 'self'; "
             f"script-src 'self' 'nonce-{nonce}' https://accounts.google.com https://cdn.jsdelivr.net; "
-            f"style-src 'self' 'nonce-{nonce}' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
+            f"style-src 'self' 'unsafe-inline' 'nonce-{nonce}' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
             f"font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; "
             f"img-src 'self' data: https:; "
             f"connect-src 'self'; "

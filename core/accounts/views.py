@@ -203,7 +203,10 @@ def register_view(request):
             return redirect('verify_email_otp')
     else:
         form = RegisterForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {
+        'form': form,
+        'csp_nonce': getattr(request, 'csp_nonce', '')
+    })
 
 
 def verify_email_otp(request):
@@ -297,7 +300,10 @@ def login_view(request):
                 else:
                     messages.error(request, 'Incorrect password. Please try again.')
     next_url = request.GET.get('next', '')
-    return render(request, 'login.html', {'next': next_url})
+    return render(request, 'login.html', {
+        'next': next_url,
+        'csp_nonce': getattr(request, 'csp_nonce', '')
+    })
 
 
 @never_cache

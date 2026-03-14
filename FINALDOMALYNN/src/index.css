@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  background: #000000;
+  color: #ffffff;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Grok Shimmer Effect */
+.grok-shimmer {
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+      rgba(139, 92, 246, 0.6) 0%,
+      rgba(59, 130, 246, 0.4) 30%,
+      rgba(236, 72, 153, 0.3) 60%,
+      transparent 100%);
+  filter: blur(80px);
+  animation: shimmer 3s ease-in-out infinite, pulse-slow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateY(-50%) scale(1.05);
+  }
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    filter: blur(80px) brightness(1);
+  }
+
+  50% {
+    filter: blur(90px) brightness(1.2);
+  }
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Section styling */
+section {
+  min-height: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: transparent;
+}
+
+@media (min-width: 640px) {
+  section {
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: 1rem 2rem;
+  }
+}
+
+/* Prevent horizontal overflow */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}

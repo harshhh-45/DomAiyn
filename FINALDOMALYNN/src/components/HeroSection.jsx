@@ -118,7 +118,7 @@ export default function HeroSection() {
                     >
                         {/* Main Logo - Responsive sizing */}
                         <motion.img
-                                src="/static/dist/sphere_logo.png"
+                            src="/sphere_logo.png"
                             alt="DomAIyn Labs Logo"
                             className="cursor-pointer w-full h-full object-contain"
                             style={{

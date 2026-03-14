@@ -6,7 +6,6 @@ import AboutSection from './components/AboutSection';
 import BayoraSection from './components/BayoraSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import CookieConsent from './components/CookieConsent';
 
 function App() {
     const [activeSection, setActiveSection] = useState('Home');
@@ -87,10 +86,8 @@ function App() {
             <BayoraSection />
             <ContactSection />
 
+            {/* Footer */}
             <Footer />
-
-            {/* Cookie Consent Banner */}
-            <CookieConsent />
         </div>
     );
 }
