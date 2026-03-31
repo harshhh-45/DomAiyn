@@ -1,56 +1,73 @@
 {% extends 'dashboard/base.html' %}
 {% block title %}Edit User | DomAIyn Panel{% endblock %}
-{% block page_title %}Edit User{% endblock %}
+{% block page_title %}User Management{% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h2>Edit — {{ u.username }}</h2>
-    <a href="{% url 'admin_users' %}" class="btn btn-ghost"><i class="bi bi-arrow-left"></i> Back</a>
+    <h2>Edit Profile — {{ u.username }}</h2>
+    <a href="{% url 'admin_users' %}" class="btn btn-ghost btn-sm"><i class="bi bi-arrow-left"></i> Back to Users</a>
 </div>
-<div class="panel-card" style="max-width:600px">
-    <div class="panel-card-body">
+
+<div class="panel-card" style="max-width: 800px;">
+    <div style="padding: 2.5rem;">
         <form method="post">
             {% csrf_token %}
-            <div class="two-col">
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" value="{{ u.username }}" required>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <div class="admin-form-group">
+                    <label class="admin-label">Username</label>
+                    <input type="text" name="username" class="admin-input" value="{{ u.username }}" required>
                 </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ u.email }}">
+                <div class="admin-form-group">
+                    <label class="admin-label">Email Address</label>
+                    <input type="email" name="email" class="admin-input" value="{{ u.email }}">
                 </div>
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" name="first_name" class="form-control" value="{{ u.first_name }}">
+                <div class="admin-form-group">
+                    <label class="admin-label">First Name</label>
+                    <input type="text" name="first_name" class="admin-input" value="{{ u.first_name }}">
                 </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" name="last_name" class="form-control" value="{{ u.last_name }}">
+                <div class="admin-form-group">
+                    <label class="admin-label">Last Name</label>
+                    <input type="text" name="last_name" class="admin-input" value="{{ u.last_name }}">
                 </div>
             </div>
-            {% if request.user.is_superadmin %}
-            <div class="form-group">
-                <label>Role</label>
-                <select name="role" class="form-control">
-                    <option value="user" {% if u.role=='user' %}selected{% endif %}>User</option>
-                    <option value="admin" {% if u.role=='admin' %}selected{% endif %}>Admin</option>
-                    <option value="superadmin" {% if u.role=='superadmin' %}selected{% endif %}>Superadmin</option>
+
+            <div class="admin-form-group">
+                <label class="admin-label">User Role</label>
+                {% if request.user.is_superuser %}
+                <select name="role" class="admin-input" style="max-width: 300px;">
+                    <option value="user" {% if u.role == 'user' %}selected{% endif %}>Standard User</option>
+                    <option value="admin" {% if u.role == 'admin' %}selected{% endif %}>Admin Access</option>
+                    <option value="superadmin" {% if u.role == 'superadmin' %}selected{% endif %}>Superadmin (Full Control)</option>
                 </select>
+                {% else %}
+                <div class="admin-input" style="opacity: 0.6; background: rgba(0,0,0,0.1); width: fit-content; min-width: 200px;">
+                    {{ u.role|capfirst }}
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">You don't have permission to change roles.</p>
+                {% endif %}
             </div>
-            {% else %}
-            <div class="form-group">
-                <label>Role</label>
-                <input type="text" class="form-control" value="{{ u.role|capfirst }}" disabled style="opacity:0.5">
-                <small style="color:var(--muted);font-size:0.78rem">Only superadmins can change roles.</small>
+
+            <div class="admin-form-group" style="padding: 1rem; background: rgba(168, 85, 247, 0.03); border: 1px dashed var(--border); border-radius: 12px; margin-top: 2rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="position: relative; width: 44px; height: 24px;">
+                        <input type="checkbox" name="is_active" id="is_active" {% if u.is_active %}checked{% endif %} style="opacity: 0; width: 0; height: 0;">
+                        <label for="is_active" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2E2B40; transition: .4s; border-radius: 34px;"></label>
+                        <span style="position: absolute; content: ''; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; pointer-events: none;"></span>
+                    </div>
+                    <label for="is_active" style="font-weight: 600; cursor: pointer;">Active Account</label>
+                </div>
+                <style nonce="{{ request.csp_nonce }}">
+                    input:checked + label { background-color: var(--accent) !important; }
+                    input:checked + label + span { transform: translateX(20px); }
+                </style>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; margin-left: 3.5rem;">If disabled, the user will be blocked from logging in.</p>
             </div>
-            {% endif %}
-            <div class="form-check">
-                <input type="checkbox" name="is_active" id="is_active" {% if u.is_active %}checked{% endif %}>
-                <label for="is_active">Active</label>
-            </div>
-            <div style="margin-top:1.5rem;display:flex;gap:0.75rem">
-                <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg"></i> Save Changes</button>
+
+            <div style="display: flex; gap: 1rem; margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem;">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-save2-fill"></i> Save Profile Changes
+                </button>
                 <a href="{% url 'admin_users' %}" class="btn btn-ghost">Cancel</a>
             </div>
         </form>

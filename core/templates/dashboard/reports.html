@@ -1,25 +1,26 @@
 {% extends 'dashboard/base.html' %}
 {% block title %}Reports | DomAIyn Panel{% endblock %}
-{% block page_title %}Reports{% endblock %}
+{% block page_title %}Analytics{% endblock %}
 
 {% block extra_head %}
+<!-- Chart.js for beautiful analytics -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="stats-grid" style="margin-bottom:2rem">
+<div class="stats-grid">
     <div class="stat-card">
         <div class="stat-icon purple"><i class="bi bi-people-fill"></i></div>
         <div class="stat-info">
             <div class="stat-value">{{ total_users }}</div>
-            <div class="stat-label">Total Users</div>
+            <div class="stat-label">Total Registered</div>
         </div>
     </div>
     <div class="stat-card">
         <div class="stat-icon green"><i class="bi bi-person-check-fill"></i></div>
         <div class="stat-info">
             <div class="stat-value">{{ active_users }}</div>
-            <div class="stat-label">Active Users</div>
+            <div class="stat-label">Active (Verified)</div>
         </div>
     </div>
     <div class="stat-card">
@@ -30,26 +31,27 @@
         </div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon blue"><i class="bi bi-envelope-fill"></i></div>
+        <div class="stat-icon blue"><i class="bi bi-envelope-check-fill"></i></div>
         <div class="stat-info">
             <div class="stat-value">{{ total_contacts }}</div>
-            <div class="stat-label">Total Messages</div>
+            <div class="stat-label">Resolved Messages</div>
         </div>
     </div>
 </div>
 
-<div class="panel-card">
+<div class="panel-card" style="margin-top: 1.5rem;">
     <div class="panel-card-header">
-        <h3><i class="bi bi-bar-chart-fill" style="color:#8b5cf6;margin-right:0.5rem"></i>User Registrations — Last 30
-            Days</h3>
+        <h3><i class="bi bi-graph-up-arrow" style="color:var(--accent);margin-right:0.5rem"></i>Growth Trends — Last 30 Days</h3>
     </div>
-    <div class="panel-card-body">
+    <div style="padding: 2rem;">
         {% if labels %}
-        <canvas id="userChart" height="100"></canvas>
+        <div style="height: 400px; position: relative;">
+            <canvas id="userChart"></canvas>
+        </div>
         {% else %}
-        <div class="empty-state">
-            <i class="bi bi-bar-chart"></i>
-            <p>No registration data for the last 30 days yet.</p>
+        <div style="text-align: center; padding: 4rem 2rem; color: var(--text-muted);">
+            <i class="bi bi-bar-chart-line" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; display: block;"></i>
+            <p>No registration data available for the selected period.</p>
         </div>
         {% endif %}
     </div>
@@ -58,37 +60,51 @@
 
 {% block extra_js %}
 {% if labels %}
-<script>
+<script nonce="{{ request.csp_nonce }}">
     const ctx = document.getElementById('userChart').getContext('2d');
+    
+    // Create gradient for the chart
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(168, 85, 247, 0.4)');
+    gradient.addColorStop(1, 'rgba(168, 85, 247, 0.05)');
+
     new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: {{ labels| safe }},
-        datasets: [{
-            label: 'New Users',
-            data: {{ data| safe }},
-        backgroundColor: 'rgba(139, 92, 246, 0.5)',
-        borderColor: 'rgba(236, 72, 153, 1)',
-        borderWidth: 2,
-        borderRadius: 6,
+            datasets: [{
+                label: 'New Users',
+                data: {{ data| safe }},
+                fill: true,
+                backgroundColor: gradient,
+                borderColor: '#A855F7',
+                borderWidth: 3,
+                pointBackgroundColor: '#A855F7',
+                pointBorderColor: '#fff',
+                pointHoverRadius: 6,
+                tension: 0.4
             }]
         },
         options: {
-        responsive: true,
-        plugins: {
-            legend: { labels: { color: '#e2e8f0', font: { family: 'Inter' } } }
-        },
-        scales: {
-            x: {
-                ticks: { color: '#64748b' },
-                grid: { color: 'rgba(255,255,255,0.05)' }
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
             },
-            y: {
-                ticks: { color: '#64748b', stepSize: 1 },
-                grid: { color: 'rgba(255,255,255,0.05)' }
+            scales: {
+                x: {
+                    border: { display: false },
+                    grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
+                    ticks: { color: '#6B697A', font: { family: 'Space Grotesk' } }
+                },
+                y: {
+                    border: { display: false },
+                    grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
+                    ticks: { color: '#6B697A', font: { family: 'Space Grotesk' }, stepSize: 1 },
+                    beginAtZero: true
+                }
             }
         }
-    }
     });
 </script>
 {% endif %}

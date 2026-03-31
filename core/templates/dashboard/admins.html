@@ -1,54 +1,67 @@
 {% extends 'dashboard/base.html' %}
 {% block title %}Admins | DomAIyn Panel{% endblock %}
-{% block page_title %}Admin Details{% endblock %}
+{% block page_title %}Security{% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h2>Admin Accounts</h2>
-    <a href="{% url 'admin_admin_create' %}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Admin</a>
+    <h2>Admin Management</h2>
+    <a href="{% url 'admin_admin_create' %}" class="btn btn-primary btn-sm">
+        <i class="bi bi-plus-lg"></i> Add New Admin
+    </a>
 </div>
+
 <div class="panel-card">
     <table class="data-table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Username</th>
-                <th>Email</th>
+                <th>Email Address</th>
                 <th>Joined</th>
-                <th>Role</th>
+                <th>Security Role</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for a in admins %}
             <tr>
-                <td style="color:var(--muted)">{{ forloop.counter }}</td>
-                <td><strong>{{ a.username }}</strong></td>
-                <td style="color:var(--muted)">{{ a.email|default:"—" }}</td>
-                <td style="color:var(--muted)">{{ a.date_joined|date:"d M Y" }}</td>
+                <td style="color:var(--text-muted)">{{ forloop.counter }}</td>
+                <td>
+                    <div style="display:flex; align-items:center; gap:0.75rem">
+                        <div class="stat-icon purple" style="width:32px; height:32px; font-size:0.8rem">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <strong>{{ a.username }}</strong>
+                    </div>
+                </td>
+                <td style="color:var(--text-muted)">{{ a.email|default:"—" }}</td>
+                <td style="color:var(--text-muted)">{{ a.date_joined|date:"d M Y" }}</td>
                 <td>
                     {% if a.is_superuser %}
-                    <span class="badge-pill badge-purple">Superuser</span>
+                    <span class="badge-pill badge-purple"><i class="bi bi-shield-check" style="margin-right:0.25rem"></i> Superadmin</span>
                     {% else %}
-                    <span class="badge-pill badge-blue">Staff</span>
+                    <span class="badge-pill badge-blue"><i class="bi bi-shield" style="margin-right:0.25rem"></i> Admin</span>
                     {% endif %}
                 </td>
                 <td>
                     {% if a != request.user %}
                     <form method="post" action="{% url 'admin_admin_delete' a.id %}"
-                        onsubmit="return confirm('Remove admin {{ a.username }}?')">
+                        onsubmit="return confirm('Revoke admin access for {{ a.username }}?')">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i>
-                            Remove</button>
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash-fill"></i> Revoke
+                        </button>
                     </form>
                     {% else %}
-                    <span style="color:var(--muted);font-size:0.8rem">You</span>
+                    <span class="badge-pill" style="background:rgba(168, 85, 247, 0.1); color:var(--accent-light);">
+                        <i class="bi bi-person-check-fill" style="margin-right:0.3rem"></i> It's You
+                    </span>
                     {% endif %}
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="6" style="text-align:center;color:var(--muted);padding:3rem">No admins found</td>
+                <td colspan="6" style="text-align:center;color:var(--text-muted);padding:3rem">No admins found</td>
             </tr>
             {% endfor %}
         </tbody>

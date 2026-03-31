@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}DomAIyn Panel{% endblock %}</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/panel.css' %}">
     {% block extra_head %}{% endblock %}
@@ -17,8 +19,7 @@
     <div class="layout">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-brand">
-                <span class="brand-icon"></span>
-                <span class="brand-name">DomAIyn</span>
+                <a href="/" style="text-decoration:none;color:inherit;">Dom<span>AI</span>yn Labs</a>
             </div>
             <nav class="sidebar-nav">
                 <a href="{% url 'admin_dashboard' %}"
@@ -35,68 +36,79 @@
                     class="nav-item {% if 'contact' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="bi bi-envelope-fill"></i>
                     <span>Contacts</span>
-                    {% if unread_count %}<span class="badge">{{ unread_count }}</span>{% endif %}
+                    {% if unread_count %}<div style="margin-left:auto"><span class="badge-pill badge-purple">{{ unread_count }}</span></div>{% endif %}
                 </a>
                 <a href="{% url 'admin_admins' %}"
                     class="nav-item {% if 'admin' in request.resolver_match.url_name and request.resolver_match.url_name != 'admin_dashboard' %}active{% endif %}">
-                    <i class="bi bi-shield-fill"></i>
+                    <i class="bi bi-shield-lock-fill"></i>
                     <span>Admins</span>
                 </a>
                 <a href="{% url 'admin_reports' %}"
                     class="nav-item {% if request.resolver_match.url_name == 'admin_reports' %}active{% endif %}">
                     <i class="bi bi-bar-chart-fill"></i>
-                    <span>Reports</span>
+                    <span>Analytics</span>
                 </a>
             </nav>
             <div class="sidebar-footer">
                 <a href="{% url 'home' %}" class="nav-item">
-                    <i class="bi bi-house-fill"></i>
-                    <span>View Site</span>
+                    <i class="bi bi-arrow-left-circle"></i>
+                    <span>Back to Site</span>
                 </a>
                 <form method="post" action="{% url 'logout' %}" style="margin:0">
                     {% csrf_token %}
-                    <button type="submit" class="nav-item text-danger-soft"
-                        style="width:100%;background:none;border:none;cursor:pointer;text-align:left">
-                        <i class="bi bi-box-arrow-left"></i>
+                    <button type="submit" class="nav-item"
+                        style="width:100%;background:none;border:none;cursor:pointer;text-align:left;color:var(--red)">
+                        <i class="bi bi-power"></i>
                         <span>Logout</span>
                     </button>
                 </form>
             </div>
         </aside>
+
         <div class="main">
             <header class="topbar">
-                <button class="sidebar-toggle" id="sidebarToggle">
+                <button class="sidebar-toggle" id="sidebarToggle" style="background:none;border:none;color:white;font-size:1.5rem;display:none;">
                     <i class="bi bi-list"></i>
                 </button>
-                <div class="topbar-title">{% block page_title %}Dashboard{% endblock %}</div>
+                <div class="topbar-title">{% block page_title %}Overview{% endblock %}</div>
                 <div class="topbar-right">
                     <div class="admin-chip">
                         <i class="bi bi-person-circle"></i>
                         <span>{{ request.user.username }}</span>
+                        <span class="badge-pill badge-purple" style="font-size:0.6rem;margin-left:0.5rem">Admin</span>
                     </div>
                 </div>
             </header>
+
             <div class="content">
                 {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    <i
-                        class="bi bi-{% if message.tags == 'success' %}check-circle{% else %}exclamation-circle{% endif %}-fill"></i>
-                    {{ message }}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {% if message.tags == 'success' %}
+                        <i class="bi bi-check-circle-fill"></i>
+                        {% else %}
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        {% endif %}
+                        {{ message }}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
                 {% endif %}
+
                 {% block content %}{% endblock %}
             </div>
         </div>
     </div>
+
     {% block extra_js %}{% endblock %}
     <script nonce="{{ request.csp_nonce }}">
         document.addEventListener('DOMContentLoaded', function () {
             var toggle = document.getElementById('sidebarToggle');
+            var sidebar = document.getElementById('sidebar');
             if (toggle) {
                 toggle.addEventListener('click', function () {
-                    document.getElementById('sidebar').classList.toggle('collapsed');
+                    sidebar.classList.toggle('show');
                 });
             }
         });

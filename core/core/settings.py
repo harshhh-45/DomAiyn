@@ -117,6 +117,13 @@ else:
 
 AUTH_USER_MODEL = 'accounts.User'
 
+AUTHENTICATION_BACKENDS = [
+    # Custom login via username or email (native Django)
+    'django.contrib.auth.backends.ModelBackend',
+    # Required for allauth social login
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
@@ -133,6 +140,8 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -190,6 +199,16 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {'access_type': 'online'},
     }
 }
+
+# Allauth Social Account Linking (allauth v65+ API)
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.MySocialAccountAdapter'
+SOCIALACCOUNT_AUTO_SIGNUP = True
+
+# New v65 allauth settings
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 if 'localhost' in SITE_URL or '127.0.0.1' in SITE_URL:
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'

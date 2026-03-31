@@ -1,6 +1,6 @@
 {% extends 'dashboard/base.html' %}
 {% block title %}Contacts | DomAIyn Panel{% endblock %}
-{% block page_title %}Contact Details{% endblock %}
+{% block page_title %}Messages{% endblock %}
 
 {% block content %}
 <div class="page-header">
@@ -22,11 +22,11 @@
         <tbody>
             {% for c in contacts %}
             <tr>
-                <td style="color:var(--muted)">{{ forloop.counter }}</td>
+                <td style="color:var(--text-muted)">{{ forloop.counter }}</td>
                 <td><strong>{{ c.name }}</strong></td>
-                <td style="color:var(--muted)">{{ c.email }}</td>
+                <td style="color:var(--text-muted)">{{ c.email }}</td>
                 <td>{{ c.subject|truncatechars:40 }}</td>
-                <td style="color:var(--muted)">{{ c.created_at|date:"d M Y" }}</td>
+                <td style="color:var(--text-muted)">{{ c.created_at|date:"d M Y" }}</td>
                 <td>
                     {% if c.is_read %}
                     <span class="badge-pill badge-blue">Read</span>
@@ -36,20 +36,22 @@
                 </td>
                 <td>
                     <div style="display:flex;gap:0.5rem">
-                        <a href="{% url 'admin_contact_view' c.id %}" class="btn btn-ghost btn-sm"><i
-                                class="bi bi-eye-fill"></i></a>
+                        <a href="{% url 'admin_contact_view' c.id %}" class="btn btn-ghost btn-sm" title="View Message">
+                            <i class="bi bi-eye-fill"></i>
+                        </a>
                         <form method="post" action="{% url 'admin_contact_delete' c.id %}"
-                            onsubmit="return confirm('Delete this message?')">
+                            onsubmit="return confirm('Delete this message?')" style="display:inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                    class="bi bi-trash-fill"></i></button>
+                            <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
                         </form>
                     </div>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="7" style="text-align:center;color:var(--muted);padding:3rem">No messages yet</td>
+                <td colspan="7" style="text-align:center;color:var(--text-muted);padding:3rem">No messages yet</td>
             </tr>
             {% endfor %}
         </tbody>
