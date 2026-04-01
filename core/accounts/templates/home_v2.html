@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DomAIyn Labs — Advanced AI Safety Testing & Adversarial Audits</title>
-<meta name="description" content="DomAIyn Labs provides automated adversarial safety testing for LLMs. We stress-test large language models to identify failures, policy violations, and predictable behavior before deployment.">
+<title>DomAiyn Labs — Advanced AI Safety Testing and Adversarial Audits</title>
+<meta name="description" content="DomAiyn Labs provides automated adversarial safety testing for Large Language Models (LLMs). We stress-test AI systems to identify failures, policy violations, and predictable behavior before deployment.">
 <meta name="keywords" content="AI safety, LLM testing, adversarial AI, AI audits, AI compliance, EU AI Act, AI risk management, Bayora">
 <meta name="robots" content="index, follow">
 
@@ -14,14 +14,14 @@
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://domaiynlabs.com/">
-<meta property="og:title" content="DomAIyn Labs — Advanced AI Safety Testing & Adversarial Audits">
+<meta property="og:title" content="DomAiyn Labs — Advanced AI Safety Testing and Adversarial Audits">
 <meta property="og:description" content="Stress-test large language models for safety failures and policy violations. Get clear reports on risk patterns and fixes.">
 <meta property="og:image" content="{% static 'dist/og-image.png' %}">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://domaiynlabs.com/">
-<meta property="twitter:title" content="DomAIyn Labs — Advanced AI Safety Testing & Adversarial Audits">
+<meta property="twitter:title" content="DomAiyn Labs — Advanced AI Safety Testing and Adversarial Audits">
 <meta property="twitter:description" content="Stress-test large language models for safety failures and policy violations. Get clear reports on risk patterns and fixes.">
 <meta property="twitter:image" content="{% static 'dist/og-image.png' %}">
 
@@ -30,10 +30,10 @@
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "DomAIyn Labs",
+  "name": "DomAiyn Labs",
   "url": "https://domaiynlabs.com/",
   "logo": "https://domaiynlabs.com/static/dist/logo.png",
-  "description": "DomAIyn Labs provides automated adversarial safety testing and audits for large language models.",
+  "description": "DomAiyn Labs provides automated adversarial safety testing and audits for large language models.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bengaluru",
@@ -50,11 +50,11 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "DomAIyn Labs — Advanced AI Safety Testing",
-  "description": "DomAIyn Labs provides automated adversarial safety testing for large language models.",
+  "name": "DomAiyn Labs — Advanced AI Safety Testing",
+  "description": "DomAiyn Labs provides automated adversarial safety testing for large language models.",
   "publisher": {
     "@type": "Organization",
-    "name": "DomAIyn Labs"
+    "name": "DomAiyn Labs"
   }
 }
 </script>
@@ -119,97 +119,26 @@ nav {
   height: 76px;
   position: relative;
 }
-/* Logo with glowing orb + rays */
+/* Logo with glowing orb + rays (Static) */
 .nav-logo {
-  font-family: var(--font-display);
-  font-weight: 700; font-size: 1.3rem;
-  color: var(--text-primary);
+  display: flex; align-items: center;
   text-decoration: none;
-  letter-spacing: -0.5px;
-  display: flex; align-items: center; gap: 0.6rem;
-  flex-shrink: 0;
 }
-.nav-logo span { color: var(--accent); }
-.logo-orb {
-  position: relative;
-  width: 30px; height: 30px;
-  flex-shrink: 0;
+.nav-logo img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  transform: scale(2.2);
+  transform-origin: left center;
 }
-.logo-orb-core {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #E879F9, #A855F7 50%, #7C3AED);
-  box-shadow: 0 0 14px rgba(168, 85, 247, 0.9), 0 0 30px rgba(168, 85, 247, 0.4);
-  position: relative;
-  z-index: 2;
-  animation: orbPulse 3s ease-in-out infinite alternate;
-}
-.logo-rays {
-  position: absolute;
-  inset: -22px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg 8deg,
-    rgba(168, 85, 247, 0.35) 8deg 10deg,
-    transparent 10deg 23deg,
-    rgba(236, 72, 153, 0.25) 23deg 25deg,
-    transparent 25deg 38deg,
-    rgba(168, 85, 247, 0.3) 38deg 40deg,
-    transparent 40deg 53deg,
-    rgba(96, 165, 250, 0.2) 53deg 55deg,
-    transparent 55deg 68deg,
-    rgba(168, 85, 247, 0.35) 68deg 70deg,
-    transparent 70deg 83deg,
-    rgba(236, 72, 153, 0.25) 83deg 85deg,
-    transparent 85deg 98deg,
-    rgba(168, 85, 247, 0.3) 98deg 100deg,
-    transparent 100deg 113deg,
-    rgba(96, 165, 250, 0.2) 113deg 115deg,
-    transparent 115deg 128deg,
-    rgba(168, 85, 247, 0.35) 128deg 130deg,
-    transparent 130deg 143deg,
-    rgba(236, 72, 153, 0.25) 143deg 145deg,
-    transparent 145deg 158deg,
-    rgba(168, 85, 247, 0.3) 158deg 160deg,
-    transparent 160deg 173deg,
-    rgba(96, 165, 250, 0.2) 173deg 175deg,
-    transparent 175deg 188deg,
-    rgba(168, 85, 247, 0.35) 188deg 190deg,
-    transparent 190deg 203deg,
-    rgba(236, 72, 153, 0.25) 203deg 205deg,
-    transparent 205deg 218deg,
-    rgba(168, 85, 247, 0.3) 218deg 220deg,
-    transparent 220deg 233deg,
-    rgba(96, 165, 250, 0.2) 233deg 235deg,
-    transparent 235deg 248deg,
-    rgba(168, 85, 247, 0.35) 248deg 250deg,
-    transparent 250deg 263deg,
-    rgba(236, 72, 153, 0.25) 263deg 265deg,
-    transparent 265deg 278deg,
-    rgba(168, 85, 247, 0.3) 278deg 280deg,
-    transparent 280deg 293deg,
-    rgba(96, 165, 250, 0.2) 293deg 295deg,
-    transparent 295deg 308deg,
-    rgba(168, 85, 247, 0.35) 308deg 310deg,
-    transparent 310deg 323deg,
-    rgba(236, 72, 153, 0.25) 323deg 325deg,
-    transparent 325deg 338deg,
-    rgba(168, 85, 247, 0.3) 338deg 340deg,
-    transparent 340deg 360deg
-  );
-  animation: raysSpin 12s linear infinite;
-  z-index: 1;
-  mix-blend-mode: screen;
-}
-@keyframes orbPulse {
-  0% { box-shadow: 0 0 14px rgba(168,85,247,0.9), 0 0 30px rgba(168,85,247,0.4); }
-  100% { box-shadow: 0 0 20px rgba(168,85,247,1), 0 0 50px rgba(168,85,247,0.6); }
-}
-@keyframes raysSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+
+
+
+
+
+
+
+
 
 /* Center nav links absolutely */
 .nav-links {
@@ -1192,11 +1121,19 @@ section { position: relative; z-index: 1; }
 .product-tagline { font-size: 1.15rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; }
 .product-badges { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
 .product-badge {
-  font-family: var(--font-mono); font-size: 0.7rem;
-  padding: 0.35rem 0.9rem; border: 1px solid var(--border);
-  border-radius: 100px; color: var(--text-muted);
-  text-transform: uppercase; letter-spacing: 0.5px;
+  font-family: var(--font-mono); font-size: 0.72rem;
+  padding: 0.45rem 1.1rem; 
+  background: rgba(168, 85, 247, 0.25);
+  border: 1.5px solid var(--accent);
+  border-radius: 100px; 
+  color: #fff;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  backdrop-filter: blur(4px);
 }
+
+
 .steps-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 0; position: relative; margin-bottom: 4rem;
@@ -1437,13 +1374,12 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
 }
 
 /* REGULATIONS BANNER */
-.reg-banner { display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
-.reg-item {
-  display: flex; align-items: center; gap: 0.5rem;
+.reg-banner { 
+  display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; justify-content: center; width: 100%;
   font-family: var(--font-mono); font-size: 0.72rem;
   color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
 }
-.reg-item .flag { font-size: 1rem; }
+
 
 /* SCROLL ANIMATIONS */
 .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -1456,14 +1392,12 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
 <header>
   <nav>
   <div class="nav-inner">
-    <!-- Glowing orb logo -->
     <a href="/" class="nav-logo">
-      <span class="logo-orb">
-        <span class="logo-rays"></span>
-        <span class="logo-orb-core"></span>
-      </span>
-      Dom<span>AI</span>yn Labs
+      <img src="{% static 'dist/High resolution image \' (1).png' %}" alt="DomAiyn Labs">
     </a>
+
+
+
 
     <!-- Centered nav links -->
     <div class="nav-links">
@@ -1497,33 +1431,9 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <!-- Interactive particle canvas -->
-  <canvas id="heroCanvas"></canvas>
-
-  <!-- Aurora gradient blobs -->
-  <div class="hero-aurora">
-    <div class="hero-aurora-blob"></div>
-    <div class="hero-aurora-blob"></div>
-    <div class="hero-aurora-blob"></div>
-    <div class="hero-aurora-blob"></div>
-  </div>
-
-  <!-- Animated grid -->
-  <div class="hero-grid"></div>
-
-
-  <!-- Mouse-follow glow -->
+  <!-- Mouse-follow glow (subtle) -->
   <div class="hero-mouse-glow" id="heroMouseGlow"></div>
 
-  <!-- Floating particles -->
-  <div class="hero-floating-particles">
-    <div class="hero-fp"></div>
-    <div class="hero-fp"></div>
-    <div class="hero-fp"></div>
-    <div class="hero-fp"></div>
-    <div class="hero-fp"></div>
-    <div class="hero-fp"></div>
-  </div>
 
   <!-- Two-column layout -->
   <div class="hero-inner">
@@ -1531,10 +1441,11 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
-        AI Safety Testing · Bengaluru, India
+        AI Safety Testing in Bengaluru, India
       </div>
-      <h1>Find out where your AI <span class="highlight">breaks</span> — before your users do.</h1>
-      <p class="hero-sub">We stress-test large language models for safety failures, policy violations, and unpredictable behaviour — then hand you a clear report showing exactly what's wrong and how to fix it.</p>
+      <h1>Find out where your AI <span class="highlight">breaks</span> before your users do.</h1>
+      <p class="hero-sub">We stress-test large language models for safety failures, policy violations, and unpredictable behavior. We then provide a clear report showing exactly what is wrong and how to fix it.</p>
+
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary">See a Sample Report →</a>
         <a href="#bayora" class="btn-secondary">How It Works</a>
@@ -1587,7 +1498,8 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
       <div class="incident-card red">
         <div class="incident-company">Google Gemini · 2024</div>
         <h3 class="incident-title">Image generator produced historically offensive results</h3>
-        <div class="incident-detail">Gemini generated racially inappropriate historical images. Google's stock dropped 4.4% — over $80 billion in market cap — in a single day. The CEO called it "unacceptable."</div>
+        <div class="incident-detail">Gemini generated racially inappropriate historical images. Google's stock dropped 4.4%, represented by over $80 billion in market cap, in a single day. The CEO called it "unacceptable."</div>
+
         <span class="incident-tag preventable">Preventable with safety testing</span>
       </div>
       <div class="incident-card yellow">
@@ -1599,7 +1511,8 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
       <div class="incident-card pink">
         <div class="incident-company">EU AI Act · 2025</div>
         <h3 class="incident-title">Fines up to €15M or 3% of global revenue</h3>
-        <div class="incident-detail">The EU AI Act is now in force. Non-compliance isn't just embarrassing — it's financially devastating. Companies need documented proof their AI systems are safe. That's what we provide.</div>
+        <div class="incident-detail">The EU AI Act is now in force. Non-compliance is more than just embarrassing; it is financially devastating. Companies need documented proof that their AI systems are safe. That is what we provide.</div>
+
         <span class="incident-tag preventable">We provide compliance evidence</span>
       </div>
     </div>
@@ -1614,30 +1527,35 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
   <div class="container" style="position: relative; z-index: 1;">
     <div class="section-label">The Market</div>
     <h2 class="section-heading">AI is scaling fast.<br>Safety testing isn't keeping up.</h2>
-    <p class="section-sub">Every company shipping an AI product needs to prove it's safe. The market for AI governance, trust, and safety tools is exploding — because the cost of getting it wrong is too high to ignore.</p>
+    <p class="section-sub">Every company shipping an AI product needs to prove it's safe. The market for AI governance, trust, and safety tools is expanding because the cost of getting it wrong is too high to ignore.</p>
+
     <div class="market-grid">
       <div class="market-card" style="--glow-color: var(--accent);">
         <div class="market-number purple counter" data-target="7.4">$0B</div>
         <h3 class="market-unit">AI TRiSM Market by 2030</h3>
-        <div class="market-desc">AI Trust, Risk and Security Management — growing at 21.6% CAGR. Companies need tools to govern AI behaviour at scale.</div>
+        <div class="market-desc">AI Trust, Risk, and Security Management is growing at a 21.6% CAGR, as companies need robust tools to govern AI behavior at scale.</div>
+
       </div>
       <div class="market-card" style="--glow-color: var(--pink);">
         <div class="market-number pink counter" data-target="4.2">$0B</div>
         <h3 class="market-unit">AI Safety Scoring by 2030</h3>
-        <div class="market-desc">The market for scoring and validating AI outputs for safety — growing at 22.6% CAGR. This is exactly where Bayora operates.</div>
+        <div class="market-desc">The market for scoring and validating AI outputs for safety is growing at a 22.6% CAGR, which is exactly where Bayora operates.</div>
+
       </div>
       <div class="market-card" style="--glow-color: var(--cyan);">
         <div class="market-number cyan counter" data-target="7.4">$0B</div>
         <h3 class="market-unit">AI Governance by 2030</h3>
-        <div class="market-desc">From $940M in 2025 to $7.4B by 2030 — a 51% CAGR. Fuelled by EU AI Act, India's AI Safety Institute, and US executive orders.</div>
+        <div class="market-desc">From $940M in 2025 to $7.4B by 2030, a 51% CAGR fueled by the EU AI Act, India's AI Safety Institute, and US executive orders.</div>
+
       </div>
     </div>
     <div class="reg-banner">
-      <div class="reg-item"><span class="flag">🇪🇺</span> EU AI Act (Active)</div>
-      <div class="reg-item"><span class="flag">🇮🇳</span> India AI Safety Institute (2025)</div>
-      <div class="reg-item"><span class="flag">🇺🇸</span> NIST AI Risk Framework</div>
-      <div class="reg-item"><span class="flag">🇨🇳</span> China Gen-AI Measures</div>
+      <span>🇪🇺 EU AI ACT (ACTIVE)</span>
+      <span>🇮🇳 INDIA AI SAFETY INSTITUTE (2025)</span>
+      <span>🇺🇸 NIST AI RISK FRAMEWORK</span>
+      <span>🇨🇳 CHINA GEN-AI MEASURES</span>
     </div>
+
   </div>
 </section>
 
@@ -1648,15 +1566,17 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
     <div class="what-grid">
       <div class="what-left">
         <div class="section-label">What We Do</div>
-        <h2 class="section-heading">We don't build AI.<br>We break it — so yours doesn't.</h2>
-        <p class="section-sub">DomAIyn Labs tests how AI systems behave when someone tries to misuse them, confuse them, or push them past their limits. We find the failures. You fix them before they cost you.</p>
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">Think of us as a crash-test facility for AI. Car manufacturers don't let customers discover safety flaws — they test for them. We do the same for language models.</p>
+        <h2 class="section-heading">We don't build AI.<br>We break it so yours doesn't.</h2>
+        <p class="section-sub">DomAiyn Labs tests how AI systems behave when someone tries to misuse them, confuse them, or push them past their limits. We find the failures, allowing you to fix them before they cause issues.</p>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">Think of us as a crash-test facility for AI. Car manufacturers don't let customers discover safety flaws; they test for them. We do the same for language models.</p>
+
       </div>
       <div class="what-cards">
         <div class="what-card" data-index="0">
           <div class="what-card-icon purple">🔴</div>
           <h3>Adversarial Safety Testing</h3>
-          <p>We throw hundreds of attack scenarios at your AI — the same tricks real attackers use — to see where it breaks. Jailbreaks, instruction overrides, roleplay exploits, multi-turn manipulation.</p>
+          <p>We throw hundreds of attack scenarios at your AI, using the same tricks real attackers use, to see where it breaks. This includes jailbreaks, instruction overrides, roleplay exploits, and multi-turn manipulation.</p>
+
         </div>
         <div class="what-card" data-index="1">
           <div class="what-card-icon pink">📊</div>
@@ -1666,12 +1586,14 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
         <div class="what-card" data-index="2">
           <div class="what-card-icon cyan">📋</div>
           <h3>Compliance-Ready Evidence</h3>
-          <p>You get a structured report — PDF, JSON logs, risk scores — that your legal and compliance teams can hand to regulators, auditors, or enterprise clients as proof of due diligence.</p>
+          <p>You get a structured report, including PDF summaries, JSON logs, and risk scores, that your legal and compliance teams can provide to regulators, auditors, or enterprise clients as proof of due diligence.</p>
+
         </div>
         <div class="what-card" data-index="3">
           <div class="what-card-icon green">🔄</div>
-          <h3>Pre &amp; Post-Deployment Testing</h3>
-          <p>Test before you launch. Test after you deploy. Continuous validation catches the drift — when your AI slowly gets worse and nobody notices until a user screenshots it.</p>
+          <h3>Pre and Post-Deployment Testing</h3>
+          <p>Test before you launch and keep testing after you deploy. Continuous validation catches model drift, ensuring your AI stays consistent over time.</p>
+
         </div>
       </div>
     </div>
@@ -1686,25 +1608,27 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
   </div>
   <div class="container">
     <div class="section-label">Who It's For</div>
-    <h2 class="section-heading">Built for the people who ship AI<br>— and the people who sign off on it.</h2>
+    <h2 class="section-heading">Built for the people who ship AI and the people who sign off on it.</h2>
+
     <p class="section-sub">If your company is using an LLM in any customer-facing product, this is for you.</p>
     <div class="audience-grid">
       <div class="audience-card" style="transition-delay: 0.1s;">
-        <h4 class="audience-role">CTO / VP Engineering</h4>
+        <h4 class="audience-role">CTO or VP of Engineering</h4>
         <h3>"Will our AI embarrass us in production?"</h3>
         <p>You're shipping fast. You know the model works for the happy path. But you haven't stress-tested the edge cases — because you don't have the tooling or the time. We do.</p>
         <div class="audience-quote">"We found 47 ways to make their chatbot ignore its system prompt. They shipped the fix in a week."</div>
       </div>
       <div class="audience-card" style="transition-delay: 0.2s;">
-        <div class="audience-role">Head of Compliance / Legal</div>
+        <div class="audience-role">Head of Compliance and Legal</div>
         <h3>"Can we prove this AI is safe?"</h3>
         <p>The EU AI Act requires documented safety evidence. Enterprise clients demand it. Your board wants assurance. We give you a report you can hand to anyone and say: "Here's the proof."</p>
         <div class="audience-quote">"The audit report was the missing piece for our enterprise deal. The client signed the next week."</div>
       </div>
       <div class="audience-card" style="transition-delay: 0.3s;">
-        <div class="audience-role">Product Leader / CEO</div>
+        <div class="audience-role">Product Leader or CEO</div>
         <h3>"What's the real risk of going live?"</h3>
-        <p>You've seen the headlines — chatbots gone rogue, fake legal citations, offensive outputs. You don't want to be the next one. We tell you exactly where the risk is before your users find it.</p>
+        <p>You have likely seen the headlines about chatbots gone rogue, fake legal citations, or offensive outputs. You don't want to be the next one. We identify exactly where the risk lies before your users find it.</p>
+
         <div class="audience-quote">"I slept better the night after the audit. We knew exactly what to fix."</div>
       </div>
     </div>
@@ -1716,8 +1640,10 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
   <canvas id="bayoraCanvas"></canvas>
   <div class="container">
     <div class="product-hero">
+
       <div class="section-label">Our Platform</div>
       <div class="product-name">Bayora</div>
+
       <p class="product-tagline">Automated adversarial safety testing for large language models. One platform. Hundreds of attack vectors. Clear, repeatable results.</p>
       <div class="product-badges">
         <span class="product-badge">Privacy-First</span>
@@ -1744,7 +1670,8 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
     </div>
     <div class="threats-heading">
       <div class="section-label">What Can Go Wrong</div>
-      <h2 class="section-heading">Four ways your AI can fail<br>— and how we test for each.</h2>
+      <h2 class="section-heading">Four ways your AI can fail and how we test for each.</h2>
+
     </div>
     <div class="threat-grid">
       <div class="threat-card">
@@ -1775,7 +1702,9 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
         <div class="threat-icon">📉</div>
         <div>
           <h4>Behavioural Drift</h4>
-          <p>The AI slowly gets worse over time — responses degrade, safety boundaries weaken — and nobody notices until a user screenshots it.</p>
+          <p>The AI slowly loses performance over time as responses degrade or safety boundaries weaken, often without being noticed until a failure occurs.</p>
+
+
           <div class="threat-example">→ Safe on day 1. Leaking customer data by month 3. No alert.</div>
         </div>
       </div>
@@ -1783,7 +1712,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- DEPLOYMENT & I/O -->
+<!-- DEPLOYMENT AND DATA FLOW -->
 <section class="deploy-section reveal" id="deploy">
   <canvas id="deployMesh"></canvas>
   <div class="container">
@@ -1797,7 +1726,8 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
             <div class="deploy-dot" style="background: var(--accent)"></div>
             <div>
               <h4>Isolated Cloud</h4>
-              <p>Dedicated, isolated cloud instances — no shared infrastructure.</p>
+              <p>Dedicated and isolated cloud instances with no shared infrastructure.</p>
+
             </div>
           </div>
           <div class="deploy-opt">
@@ -1810,7 +1740,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
           <div class="deploy-opt">
             <div class="deploy-dot" style="background: var(--pink)"></div>
             <div>
-              <h4>On-Prem / Air-Gapped</h4>
+              <h4>On-Prem and Air-Gapped</h4>
               <p>Fully air-gapped deployment for the most security-sensitive environments.</p>
             </div>
           </div>
@@ -1840,7 +1770,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- CTA / CONTACT -->
+<!-- GET IN TOUCH -->
 <section class="cta-section" id="contact">
   <canvas id="contactQuantum"></canvas>
   <div class="container">
@@ -1860,11 +1790,13 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
         <div class="char-count" id="charCount">0 / 500</div>
         <button type="submit" class="btn-primary liquid" style="justify-content:center; width: 100%;">Send Message →</button>
         <div class="form-success" id="formSuccess">✓ Message sent! We'll get back to you within 24 hours.</div>
-        <div class="form-error" id="formError">Something went wrong. Please try again or email us at hello@domaiynlabs.com</div>
+        <div class="form-error" id="formError">Something went wrong. Please try again or email us at domaiynlabs@gmail.com</div>
+
       </form>
       
       <div class="contact-footer-info">
-        <span style="color: var(--text-muted); font-size: 0.9rem;">Quick contact: hello@domaiynlabs.com</span>
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Quick contact: domaiynlabs@gmail.com</span>
+
         <button class="copy-email-btn" id="copyEmailBtn">
           <span>Copy Email</span>
           <div class="copy-tooltip">Copied!</div>
@@ -1880,152 +1812,34 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
     <div class="footer-inner">
       <div class="footer-left">© 2026 DomAIyn Labs LLP · Bengaluru, India</div>
       <div class="footer-right">
-        <a href="#">LinkedIn</a>
+        <a href="https://www.linkedin.com/company/domaiynlab/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="#contact">Contact</a>
         <a href="#">Privacy</a>
       </div>
+
     </div>
   </div>
 </footer>
 
 <script nonce="{{ csp_nonce }}">
 // ===== HERO INTERACTIVE CANVAS =====
+// Hero Section: Interactive Mouse Glow Only
 (function() {
-  const canvas = document.getElementById('heroCanvas');
   const heroSection = document.getElementById('hero');
   const mouseGlow = document.getElementById('heroMouseGlow');
-  if (!canvas || !heroSection) return;
+  if (!heroSection || !mouseGlow) return;
 
-  const ctx = canvas.getContext('2d');
-  let w, h;
-  let mouseX = 0, mouseY = 0;
-  let particles = [];
-  let connections = [];
-
-  const resize = () => {
-    w = canvas.width = heroSection.clientWidth;
-    h = canvas.height = heroSection.clientHeight;
-  };
-  window.addEventListener('resize', resize);
-  resize();
-
-  // Mouse tracking for interactive glow
   heroSection.addEventListener('mousemove', (e) => {
     const rect = heroSection.getBoundingClientRect();
-    mouseX = e.clientX - rect.left;
-    mouseY = e.clientY - rect.top;
-    if (mouseGlow) {
-      mouseGlow.style.opacity = '1';
-      mouseGlow.style.left = mouseX + 'px';
-      mouseGlow.style.top = mouseY + 'px';
-    }
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    mouseGlow.style.opacity = '1';
+    mouseGlow.style.left = mouseX + 'px';
+    mouseGlow.style.top = mouseY + 'px';
   });
   heroSection.addEventListener('mouseleave', () => {
-    mouseX = -1000; mouseY = -1000;
-    if (mouseGlow) mouseGlow.style.opacity = '0';
+    mouseGlow.style.opacity = '0';
   });
-
-  // Particle class for constellation effect
-  class HeroParticle {
-    constructor() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.size = Math.random() * 2 + 0.5;
-      this.opacity = Math.random() * 0.5 + 0.2;
-      this.hue = Math.random() > 0.5 ? 270 : (Math.random() > 0.5 ? 330 : 190);
-      this.pulseSpeed = Math.random() * 0.02 + 0.01;
-      this.pulsePhase = Math.random() * Math.PI * 2;
-    }
-    update(t) {
-      this.x += this.vx;
-      this.y += this.vy;
-      // Mouse repulsion
-      const dx = this.x - mouseX;
-      const dy = this.y - mouseY;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 200 && dist > 0) {
-        const force = (200 - dist) / 200 * 0.8;
-        this.vx += (dx / dist) * force * 0.05;
-        this.vy += (dy / dist) * force * 0.05;
-      }
-      // Damping
-      this.vx *= 0.99;
-      this.vy *= 0.99;
-      // Wrap around
-      if (this.x < 0) this.x = w;
-      if (this.x > w) this.x = 0;
-      if (this.y < 0) this.y = h;
-      if (this.y > h) this.y = 0;
-      // Pulse
-      this.currentOpacity = this.opacity + Math.sin(t * this.pulseSpeed + this.pulsePhase) * 0.15;
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${this.hue}, 80%, 70%, ${this.currentOpacity})`;
-      ctx.fill();
-      // Glow
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${this.hue}, 80%, 70%, ${this.currentOpacity * 0.15})`;
-      ctx.fill();
-    }
-  }
-
-  // Create particles
-  const particleCount = Math.min(80, Math.floor(w * h / 15000));
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new HeroParticle());
-  }
-
-  let frame = 0;
-  const animate = () => {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, w, h);
-    frame++;
-
-    // Update & draw particles
-    particles.forEach(p => { p.update(frame); p.draw(); });
-
-    // Draw connections
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 150) {
-          const alpha = (1 - dist / 150) * 0.12;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(168, 85, 247, ${alpha})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Draw mouse connections
-    if (mouseX > 0 && mouseY > 0) {
-      particles.forEach(p => {
-        const dx = p.x - mouseX;
-        const dy = p.y - mouseY;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 200) {
-          const alpha = (1 - dist / 200) * 0.25;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouseX, mouseY);
-          ctx.strokeStyle = `rgba(236, 72, 153, ${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      });
-    }
-  };
-  animate();
 })();
 
 // Scroll reveal
@@ -2183,106 +1997,10 @@ function animateValue(obj, start, end, duration) {
   window.requestAnimationFrame(step);
 }
 
-// Advanced Deployment Animations
+// Advanced Deployment Section logic
 const initDeployAnimations = () => {
   const section = document.getElementById('deploy');
-  const canvas = document.getElementById('deployMesh');
-  if (!section || !canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let w, h;
-  let mouse = { x: null, y: null };
-
-  const resize = () => {
-    w = canvas.width = section.clientWidth;
-    h = canvas.height = section.clientHeight;
-  };
-  window.addEventListener('resize', resize);
-  resize();
-
-  section.addEventListener('mousemove', (e) => {
-    const rect = section.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-
-  section.addEventListener('mouseleave', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-
-  class Particle {
-    constructor() {
-      this.reset();
-    }
-    reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
-      this.size = Math.random() * 2;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > w) this.vx *= -1;
-      if (this.y < 0 || this.y > h) this.vy *= -1;
-
-      if (mouse.x) {
-        let dx = this.x - mouse.x;
-        let dy = this.y - mouse.y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          this.vx += dx * 0.001;
-          this.vy += dy * 0.001;
-        }
-      }
-    }
-    draw() {
-      ctx.fillStyle = 'rgba(168, 85, 247, 0.4)';
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < 60; i++) particles.push(new Particle());
-
-  const animate = () => {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach((p, i) => {
-      p.update();
-      p.draw();
-      for (let j = i + 1; j < particles.length; j++) {
-        let p2 = particles[j];
-        let dx = p.x - p2.x;
-        let dy = p.y - p2.y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 * (1 - dist / 100)})`;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-    });
-    requestAnimationFrame(animate);
-  };
-  animate();
-
-  // Magnetic Aura Tracker
-  const cards = section.querySelectorAll('.deploy-opt, .io-card');
-  cards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty('--mx', `${x}px`);
-      card.style.setProperty('--my', `${y}px`);
-    });
-  });
+  if (!section) return;
 
   // Data Stream Pulses
   const ioItems = section.querySelectorAll('.io-item');
@@ -2294,197 +2012,10 @@ const initDeployAnimations = () => {
   }, 1000);
 };
 
-// Quantum Mesh (Contact Background)
+// Contact Section: Logic only
 const initContactQuantum = () => {
-  const canvas = document.getElementById('contactQuantum');
   const section = document.getElementById('contact');
-  if (!canvas || !section) return;
-
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let w, h;
-  let mouse = { x: null, y: null, active: false };
-
-  const resize = () => {
-    w = canvas.width = section.clientWidth;
-    h = canvas.height = section.clientHeight;
-  };
-  window.addEventListener('resize', resize);
-  resize();
-
-  section.addEventListener('mousemove', (e) => {
-    const rect = section.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-    mouse.active = true;
-  });
-
-  section.addEventListener('mouseleave', () => { mouse.active = false; });
-
-  class Particle {
-    constructor() {
-      this.reset();
-    }
-    reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.alpha = Math.random() * 0.5 + 0.2;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < 0 || this.x > w) this.vx *= -1;
-      if (this.y < 0 || this.y > h) this.vy *= -1;
-
-      if (mouse.active) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 200) {
-          const force = (200 - dist) / 200;
-          this.vx += dx * force * 0.002;
-          this.vy += dy * force * 0.002;
-        }
-      }
-      this.vx *= 0.99;
-      this.vy *= 0.99;
-    }
-    draw() {
-      ctx.fillStyle = `rgba(168, 85, 247, ${this.alpha})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  class Star {
-    constructor() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.size = Math.random() * 1.2;
-      this.pulse = Math.random() * Math.PI * 2;
-      this.pulseSpeed = 0.02 + Math.random() * 0.03;
-    }
-    draw() {
-      this.pulse += this.pulseSpeed;
-      const alpha = 0.2 + (Math.sin(this.pulse) + 1) * 0.3;
-      ctx.fillStyle = `rgba(168, 85, 247, ${alpha})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  class Nebula {
-    constructor() {
-      this.reset();
-    }
-    reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.baseSize = 150 + Math.random() * 200;
-      this.size = this.baseSize;
-      this.vx = (Math.random() - 0.5) * 0.2;
-      this.vy = (Math.random() - 0.5) * 0.2;
-      this.color = Math.random() > 0.5 ? '168, 85, 247' : '236, 72, 153';
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < -this.size) this.x = w + this.size;
-      if (this.x > w + this.size) this.x = -this.size;
-      if (this.y < -this.size) this.y = h + this.size;
-      if (this.y > h + this.size) this.y = -this.size;
-    }
-    draw() {
-      const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-      grad.addColorStop(0, `rgba(${this.color}, 0.06)`);
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  let stars = [];
-  let nebulae = [];
-  for (let i = 0; i < 200; i++) stars.push(new Star());
-  for (let i = 0; i < 5; i++) nebulae.push(new Nebula());
-  for (let i = 0; i < 150; i++) particles.push(new Particle());
-
-  const animate = () => {
-    ctx.clearRect(0, 0, w, h);
-    
-    // Draw Nebulae
-    nebulae.forEach(n => {
-      n.update();
-      n.draw();
-    });
-
-    // Draw Stars
-    stars.forEach(s => s.draw());
-
-    // Draw Particles & Mesh
-    particles.forEach((p, i) => {
-      p.update();
-      p.draw();
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const dx = p.x - p2.x;
-        const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          ctx.strokeStyle = `rgba(168, 85, 247, ${0.2 * (1 - dist / 100)})`;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      }
-    });
-    requestAnimationFrame(animate);
-  };
-  animate();
-
-  // Liquid Ripple Button
-  const liquidBtn = section.querySelector('.btn-primary.liquid');
-  if (liquidBtn) {
-    liquidBtn.addEventListener('mousemove', (e) => {
-      const rect = liquidBtn.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      liquidBtn.style.setProperty('--x', `${x}px`);
-      liquidBtn.style.setProperty('--y', `${y}px`);
-    });
-  }
-
-  // Success Particle Burst
-  const contactForm = document.getElementById('contactForm');
-  const formSuccess = document.getElementById('formSuccess');
-  if (contactForm && formSuccess) {
-    contactForm.addEventListener('submit', (e) => {
-      // Create burst on submit button location
-      const btnRect = liquidBtn.getBoundingClientRect();
-      const burstX = btnRect.left + btnRect.width / 2;
-      const burstY = btnRect.top + btnRect.height / 2;
-      
-      for (let i = 0; i < 30; i++) {
-        const p = new Particle();
-        p.x = mouse.x || w/2;
-        p.y = mouse.y || h/2;
-        p.vx = (Math.random() - 0.5) * 10;
-        p.vy = (Math.random() - 0.5) * 10;
-        p.size = Math.random() * 4 + 2;
-        p.alpha = 1;
-        particles.push(p);
-      }
-    });
-  }
+  if (!section) return;
 
   // Character Counter
   const messageArea = document.getElementById('cf-message');
@@ -2501,7 +2032,7 @@ const initContactQuantum = () => {
   const copyBtn = document.getElementById('copyEmailBtn');
   if (copyBtn) {
     copyBtn.onclick = () => {
-      navigator.clipboard.writeText('hello@domaiynlabs.com').then(() => {
+      navigator.clipboard.writeText('domaiynlabs@gmail.com').then(() => {
         copyBtn.classList.add('copied');
         setTimeout(() => copyBtn.classList.remove('copied'), 2000);
       });
@@ -2509,6 +2040,7 @@ const initContactQuantum = () => {
   }
 };
 
+// Background removal cleanup
 if (document.readyState === 'complete') {
   initDeployAnimations();
   initContactQuantum();
@@ -2568,7 +2100,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
   btn.textContent = 'Send Message →';
   btn.disabled = false;
 });
-// Bayora 3D Background Animation
+
+// Bayora 3D Background Animation (Restored)
 const initBayora3D = () => {
   const canvas = document.getElementById('bayoraCanvas');
   if (!canvas) return;
@@ -2648,6 +2181,8 @@ const initBayora3D = () => {
 
 if (document.readyState === 'complete') initBayora3D();
 else window.addEventListener('load', initBayora3D);
+
+
 </script>
 </body>
 </html>
