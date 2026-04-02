@@ -71,10 +71,9 @@
             const btnAccept = document.getElementById('btn-accept-cookies');
             const btnDecline = document.getElementById('btn-decline-cookies');
 
-            if (!consent) {
-                banner.style.display = 'block';
-                banner.classList.add('banner-enter');
-            }
+            // Always show banner on load as per user request
+            banner.style.display = 'block';
+            banner.classList.add('banner-enter');
 
             function handleConsent(choice) {
                 localStorage.setItem('domayl_cookie_consent', choice);

@@ -5,11 +5,8 @@ export default function CookieConsent() {
     const [showBanner, setShowBanner] = useState(false);
 
     useEffect(() => {
-        // Check if user has already made a choice
-        const consent = localStorage.getItem('domayl_cookie_consent');
-        if (!consent) {
-            setShowBanner(true);
-        }
+        // Show banner every time user visits (as per user request)
+        setShowBanner(true);
     }, []);
 
     const handleAccept = () => {
