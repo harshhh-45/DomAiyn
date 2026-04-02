@@ -4,40 +4,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DomAiyn Labs — Advanced AI Safety Testing and Adversarial Audits</title>
-<meta name="description" content="DomAiyn Labs provides automated adversarial safety testing for Large Language Models (LLMs). We stress-test AI systems to identify failures, policy violations, and predictable behavior before deployment.">
+<title>DomAIyn Labs — Advanced AI Safety Testing and Adversarial Audits</title>
+<meta name="description" content="DomAIyn Labs provides automated adversarial safety testing for Large Language Models (LLMs). We stress-test AI systems to identify failures, policy violations, and predictable behavior before deployment.">
 <meta name="keywords" content="AI safety, LLM testing, adversarial AI, AI audits, AI compliance, EU AI Act, AI risk management, Bayora">
 <meta name="robots" content="index, follow">
 
+<link rel="icon" type="image/png" href="{% static 'dist/favicon.png' %}">
 <link rel="canonical" href="https://domaiynlabs.com/">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://domaiynlabs.com/">
-<meta property="og:title" content="DomAiyn Labs — Advanced AI Safety Testing and Adversarial Audits">
-<meta property="og:description" content="Stress-test large language models for safety failures and policy violations. Get clear reports on risk patterns and fixes.">
-<meta property="og:image" content="{% static 'dist/og-image.png' %}">
+<meta property="og:title" content="DomAIyn Labs — Advanced AI Safety Testing and Adversarial Audits">
+<meta property="og:description" content="Advanced AI safety audits and red-teaming for LLMs.">
+<meta property="og:image" content="https://domaiynlabs.com/static/dist/logo.png">
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://domaiynlabs.com/">
-<meta property="twitter:title" content="DomAiyn Labs — Advanced AI Safety Testing and Adversarial Audits">
-<meta property="twitter:description" content="Stress-test large language models for safety failures and policy violations. Get clear reports on risk patterns and fixes.">
-<meta property="twitter:image" content="{% static 'dist/og-image.png' %}">
+<meta property="twitter:title" content="DomAIyn Labs — Advanced AI Safety Testing and Adversarial Audits">
+<meta property="twitter:description" content="Advanced AI safety audits and red-teaming for LLMs.">
+<meta property="twitter:image" content="https://domaiynlabs.com/static/dist/logo.png">
 
 <!-- Structured Data: Organization -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "DomAiyn Labs",
+  "name": "DomAIyn Labs",
   "url": "https://domaiynlabs.com/",
   "logo": "https://domaiynlabs.com/static/dist/logo.png",
-  "description": "DomAiyn Labs provides automated adversarial safety testing and audits for large language models.",
+  "description": "DomAIyn Labs provides automated adversarial safety testing and audits for large language models.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bengaluru",
-    "addressCountry": "IN"
+    "addressCountry": "India"
   },
   "sameAs": [
     "https://www.linkedin.com/company/domaiyn-labs"
@@ -50,11 +51,11 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "DomAiyn Labs — Advanced AI Safety Testing",
-  "description": "DomAiyn Labs provides automated adversarial safety testing for large language models.",
+  "name": "DomAIyn Labs — Advanced AI Safety Testing",
+  "description": "DomAIyn Labs provides automated adversarial safety testing for large language models.",
   "publisher": {
     "@type": "Organization",
-    "name": "DomAiyn Labs"
+    "name": "DomAIyn Labs"
   }
 }
 </script>
@@ -72,7 +73,7 @@
   --accent-light: #C084FC;
   --accent-glow: rgba(168, 85, 247, 0.15);
   --pink: #EC4899;
-  --cyan: #22D3EE;
+  --cyan: #2563EB; /* Vibrant Blue */
   --red-alert: #EF4444;
   --green: #22C55E;
   --yellow: #EAB308;
@@ -128,7 +129,7 @@ nav {
   height: 64px;
   width: auto;
   object-fit: contain;
-  transform: scale(2.2);
+  transform: scale(1.2);
   transform-origin: left center;
 }
 
@@ -199,108 +200,14 @@ section { position: relative; z-index: 1; }
   padding-top: 76px;
   position: relative;
   overflow: hidden;
-  background: var(--bg-primary);
+  background: #000;
 }
 
-/* Interactive canvas background */
-#heroCanvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Animated aurora gradient mesh */
-.hero-aurora {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-.hero-aurora-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.4;
-  mix-blend-mode: screen;
-}
-.hero-aurora-blob:nth-child(1) {
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.5), transparent 70%);
-  top: -15%; left: -5%;
-  animation: auroraFloat1 12s ease-in-out infinite alternate;
-}
-.hero-aurora-blob:nth-child(2) {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent 70%);
-  top: 50%; right: -10%;
-  animation: auroraFloat2 10s ease-in-out infinite alternate;
-}
-.hero-aurora-blob:nth-child(3) {
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.25), transparent 70%);
-  bottom: -20%; left: 25%;
-  animation: auroraFloat3 14s ease-in-out infinite alternate;
-}
-.hero-aurora-blob:nth-child(4) {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.35), transparent 70%);
-  top: 20%; right: 30%;
-  animation: auroraFloat4 8s ease-in-out infinite alternate;
-}
-
-@keyframes auroraFloat1 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(80px, 60px) scale(1.3); }
-}
-@keyframes auroraFloat2 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-70px, -50px) scale(1.2); }
-}
-@keyframes auroraFloat3 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, -80px) scale(1.15); }
-}
-@keyframes auroraFloat4 {
-  0% { transform: translate(0, 0) scale(0.8); opacity: 0.3; }
-  100% { transform: translate(-40px, 40px) scale(1.1); opacity: 0.5; }
-}
-
-/* Animated grid lines */
-.hero-grid {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image:
-    linear-gradient(rgba(168, 85, 247, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 85, 247, 0.06) 1px, transparent 1px);
-  background-size: 80px 80px;
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 80%);
-  z-index: 0;
-  pointer-events: none;
-  animation: gridDrift 25s linear infinite;
-}
-@keyframes gridDrift {
-  from { background-position: 0 0; }
-  to { background-position: 80px 80px; }
-}
+/* Background cleaned up */
 
 
 
-/* Mouse-following glow */
-.hero-mouse-glow {
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-  transform: translate(-50%, -50%);
-  transition: left 0.3s ease-out, top 0.3s ease-out;
-  opacity: 0;
-}
+/* No mouse glow */
 
 /* Hero Inner: two-column layout */
 .hero-inner {
@@ -1392,8 +1299,9 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
 <header>
   <nav>
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <img src="{% static 'dist/High resolution image \' (1).png' %}" alt="DomAiyn Labs">
+    <a href="/" class="nav-logo" style="display: flex; align-items: center; gap: 4rem;">
+      <img src="{% static 'dist/sphere_logo.png' %}" alt="DomAIyn Sphere Logo">
+      <img src="{% static 'dist/High_resolution_image____1_-removebg-preview.png' %}" alt="DomAIyn Labs Logo">
     </a>
 
 
@@ -1431,8 +1339,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <!-- Mouse-follow glow (subtle) -->
-  <div class="hero-mouse-glow" id="heroMouseGlow"></div>
+  <!-- No background animations -->
 
 
   <!-- Two-column layout -->
@@ -1447,7 +1354,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
       <p class="hero-sub">We stress-test large language models for safety failures, policy violations, and unpredictable behavior. We then provide a clear report showing exactly what is wrong and how to fix it.</p>
 
       <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">See a Sample Report →</a>
+        <a href="mailto:domaiynlabs@gmail.com" class="btn-primary">See a Sample Report →</a>
         <a href="#bayora" class="btn-secondary">How It Works</a>
       </div>
 
@@ -1470,8 +1377,6 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
   <div class="crisis-bg">
     <div class="crisis-glow crisis-glow-1"></div>
     <div class="crisis-glow crisis-glow-2"></div>
-    <div class="glitch-line"></div>
-    <div class="glitch-line" style="animation-delay: 5s;"></div>
   </div>
   <div class="crisis-container">
     <div class="crisis-label">Real incidents · Real consequences</div>
@@ -1567,7 +1472,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
       <div class="what-left">
         <div class="section-label">What We Do</div>
         <h2 class="section-heading">We don't build AI.<br>We break it so yours doesn't.</h2>
-        <p class="section-sub">DomAiyn Labs tests how AI systems behave when someone tries to misuse them, confuse them, or push them past their limits. We find the failures, allowing you to fix them before they cause issues.</p>
+        <p class="section-sub">DomAIyn Labs tests how AI systems behave when someone tries to misuse them, confuse them, or push them past their limits. We find the failures, allowing you to fix them before they cause issues.</p>
         <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.7;">Think of us as a crash-test facility for AI. Car manufacturers don't let customers discover safety flaws; they test for them. We do the same for language models.</p>
 
       </div>
@@ -1813,7 +1718,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
       <div class="footer-left">© 2026 DomAIyn Labs LLP · Bengaluru, India</div>
       <div class="footer-right">
         <a href="https://www.linkedin.com/company/domaiynlab/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="#contact">Contact</a>
+        <a href="mailto:domaiynlabs@gmail.com">Contact</a>
         <a href="#">Privacy</a>
       </div>
 
@@ -1822,25 +1727,7 @@ footer { padding: 3rem 0; border-top: 1px solid var(--border); }
 </footer>
 
 <script nonce="{{ csp_nonce }}">
-// ===== HERO INTERACTIVE CANVAS =====
-// Hero Section: Interactive Mouse Glow Only
-(function() {
-  const heroSection = document.getElementById('hero');
-  const mouseGlow = document.getElementById('heroMouseGlow');
-  if (!heroSection || !mouseGlow) return;
-
-  heroSection.addEventListener('mousemove', (e) => {
-    const rect = heroSection.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    mouseGlow.style.opacity = '1';
-    mouseGlow.style.left = mouseX + 'px';
-    mouseGlow.style.top = mouseY + 'px';
-  });
-  heroSection.addEventListener('mouseleave', () => {
-    mouseGlow.style.opacity = '0';
-  });
-})();
+// Hero Section: Background items removed
 
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
@@ -2112,7 +1999,7 @@ const initBayora3D = () => {
   camera.position.z = 5;
 
   const points = [];
-  const colors = [0xA855F7, 0xEC4899, 0x22D3EE]; // Purple, Pink, Cyan
+  const colors = [0xA855F7, 0xEC4899, 0x2563EB]; // Purple, Pink, Blue
   const spheres = [];
   const particleSystems = [];
 
