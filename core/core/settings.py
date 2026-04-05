@@ -22,8 +22,15 @@ if _sentry_dsn and not DEBUG:
         send_default_pii=True,
     )
 
-_allowed = config('ALLOWED_HOSTS', default='127.0.0.1,localhost')
+_allowed = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,domaiynlabs.com,www.domaiynlabs.com')
 ALLOWED_HOSTS = [h.strip() for h in _allowed.split(',') if h.strip()]
+
+# CSRF Trusted Origins for Django 4.0+ 
+CSRF_TRUSTED_ORIGINS = [
+    'https://domaiynlabs.com',
+    'https://www.domaiynlabs.com',
+    'https://domaiyn-backend.onrender.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

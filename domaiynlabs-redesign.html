@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DomAIyn Labs — AI Safety Testing</title>
+<link rel="icon" type="image/png" href="core/static/dist/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -563,6 +564,11 @@ section { position: relative; z-index: 1; }
   transition: all 0.3s;
 }
 .threat-card:hover { border-color: var(--accent); }
+.nav-logo img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
 .threat-icon {
   width: 44px; height: 44px; min-width: 44px;
   border-radius: 10px;
@@ -760,7 +766,10 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Dom<span>AI</span>yn Labs</a>
+    <a href="/" class="nav-logo" style="display: flex; align-items: center; gap: 1rem;">
+      <img src="core/static/dist/sphere_logo.png" alt="DomAiyn Sphere Logo">
+      <img src="core/static/dist/High_resolution_image____1_-removebg-preview.png" alt="DomAiyn Labs Logo">
+    </a>
     <div class="nav-links">
       <a href="#problem">The Problem</a>
       <a href="#what">What We Do</a>
@@ -1081,8 +1090,8 @@ footer {
     <h2 class="cta-heading">Don't wait for the screenshot.<br>Test your AI now.</h2>
     <p class="cta-sub">Every company that made the headlines above thought their AI was fine. Let's make sure yours actually is.</p>
     <div class="cta-buttons">
-      <a href="mailto:hello@domaiynlabs.com" class="btn-primary">See a Sample Report →</a>
-      <a href="mailto:hello@domaiynlabs.com" class="btn-secondary">Book a 15-Min Call</a>
+      <a href="mailto:domaiynlabs@gmail.com" class="btn-primary">See a Sample Report →</a>
+      <a href="mailto:domaiynlabs@gmail.com" class="btn-secondary">Book a 15-Min Call</a>
     </div>
   </div>
 </section>
@@ -1093,15 +1102,115 @@ footer {
     <div class="footer-inner">
       <div class="footer-left">© 2026 DomAIyn Labs LLP · Bengaluru, India</div>
       <div class="footer-right">
-        <a href="#">LinkedIn</a>
-        <a href="#">Contact</a>
+        <a href="https://www.linkedin.com/company/domaiynlab/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:domaiynlabs@gmail.com">Contact</a>
         <a href="#">Privacy</a>
       </div>
     </div>
   </div>
 </footer>
 
+<!-- Cookie Consent Banner -->
+<div id="auth-cookie-banner">
+    <div class="banner-content">
+        <div class="banner-text-wrapper">
+            <h3 class="banner-title">We value your privacy</h3>
+            <p class="banner-message">
+                We use cookies and similar technologies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+            </p>
+        </div>
+        <div class="banner-actions">
+            <button id="btn-decline-cookies" class="btn-consent btn-decline">Decline</button>
+            <button id="btn-accept-cookies" class="btn-consent btn-accept">Accept All</button>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Cookie banner styling */
+#auth-cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%;
+  z-index: 9999;
+  padding: 1.5rem;
+  display: block; /* Always show initially */
+}
+.banner-content {
+  background: rgba(13, 11, 20, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-top: 1px solid var(--border-hover);
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(168, 85, 247, 0.08);
+}
+@media (min-width: 768px) {
+  .banner-content { flex-direction: row; align-items: center; justify-content: space-between; }
+}
+.banner-text-wrapper { flex: 1; text-align: left; }
+.banner-title {
+  font-family: var(--font-display);
+  font-size: 1rem; font-weight: 700;
+  margin-bottom: 0.35rem;
+  background: linear-gradient(to right, var(--accent), var(--pink));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.banner-message { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+.banner-actions { display: flex; gap: 0.75rem; flex-shrink: 0; }
+.btn-consent {
+  font-family: var(--font-display);
+  font-weight: 600; font-size: 0.82rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-decline {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn-decline:hover { border-color: var(--border-hover); color: var(--text-secondary); }
+.btn-accept {
+  background: linear-gradient(135deg, var(--accent), #9333EA);
+  color: white; border: none;
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.25);
+}
+.btn-accept:hover { box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4); transform: translateY(-1px); }
+.banner-enter { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.banner-exit { animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideDown { from { transform: translateY(0); opacity: 1; } to { transform: translateY(100%); opacity: 0; } }
+</style>
+
 <script>
+// Cookie logic for redesign
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('auth-cookie-banner');
+    const btnAccept = document.getElementById('btn-accept-cookies');
+    const btnDecline = document.getElementById('btn-decline-cookies');
+
+    // Always show banner on load as per user request
+    banner.classList.add('banner-enter');
+
+    function handleConsent(choice) {
+        localStorage.setItem('domayl_cookie_consent', choice);
+        banner.classList.replace('banner-enter', 'banner-exit');
+        setTimeout(() => { banner.style.display = 'none'; }, 400);
+    }
+
+    btnAccept.addEventListener('click', () => handleConsent('accepted'));
+    btnDecline.addEventListener('click', () => handleConsent('rejected'));
+});
+
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
