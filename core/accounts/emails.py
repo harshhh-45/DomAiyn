@@ -140,3 +140,42 @@ def send_admin_new_signup_notification(username, email):
     if ADMIN_EMAIL:
         return _send(subject, html, ADMIN_EMAIL)
     return False
+
+def send_admin_new_contact_notification(name, email, phone, subject, message):
+    email_subject = f'[DomAIyn Admin] New Contact Enquiry: {subject}'
+    html = f"""
+    <div style="font-family:Inter,sans-serif;max-width:480px;margin:0 auto;background:#0d0d1a;color:#fff;border-radius:12px;overflow:hidden">
+      <div style="background:linear-gradient(135deg,#eab308,#ca8a04);padding:24px 32px">
+        <h2 style="margin:0;font-size:18px"> New Contact Enquiry</h2>
+      </div>
+      <div style="padding:24px 32px">
+        <table style="width:100%;border-collapse:collapse">
+          <tr>
+            <td style="padding:8px 0;color:rgba(255,255,255,.5);font-size:13px;width:120px">Name</td>
+            <td style="padding:8px 0;font-weight:600">{name}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:rgba(255,255,255,.5);font-size:13px">Email</td>
+            <td style="padding:8px 0">{email}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0;color:rgba(255,255,255,.5);font-size:13px">Phone</td>
+            <td style="padding:8px 0">{phone}</td>
+          </tr>
+        </table>
+        <div style="background:#1a1a2e;border-left:4px solid #eab308;border-radius:6px;padding:16px;margin:24px 0">
+          <p style="margin:0;color:rgba(255,255,255,.9);font-weight:600;font-size:14px">Message:</p>
+          <p style="margin:8px 0 0;color:rgba(255,255,255,.7);font-size:14px;white-space:pre-wrap">{message}</p>
+        </div>
+        <a href="{BACKEND_URL}/panel/contacts/" style="display:inline-block;background:#1a1a2e;border:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-size:13px;margin-top:16px">
+          View in Admin Panel →
+        </a>
+      </div>
+      <div style="background:#0a0a14;padding:12px;text-align:center;font-size:11px;color:rgba(255,255,255,.3)">
+        DomAIyn Admin Notification System
+      </div>
+    </div>
+    """
+    if ADMIN_EMAIL:
+        return _send(email_subject, html, ADMIN_EMAIL)
+    return False

@@ -33,6 +33,7 @@ from .emails import (
     send_password_reset_otp,
     send_welcome_email,
     send_admin_new_signup_notification,
+    send_admin_new_contact_notification,
 )
 
 User = get_user_model()
@@ -167,6 +168,13 @@ def contact_submit(request):
         return JsonResponse({'success': False, 'error': 'Name, email, subject and message are required.'}, status=400)
 
     ContactMessage.objects.create(name=name, email=email, phone=phone, subject=subject, message=message)
+    
+    logger.info(f"[EMAIL INFO] Starting admin notification email for contact enquiry from {email}")
+    if getattr(settings, 'SEND_EMAIL_SYNCHRONOUSLY', False):
+        send_admin_new_contact_notification(name, email, phone, subject, message)
+    else:
+        threading.Thread(target=send_admin_new_contact_notification, args=(name, email, phone, subject, message)).start()
+        
     return JsonResponse({'success': True, 'message': 'Thank you! We will get back to you soon.'})
 
 
